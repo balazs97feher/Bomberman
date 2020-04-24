@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bomberman.Controller">
+   <children>
+      <Button id="backtomain4" fx:id="backtomain4" layoutX="619.0" layoutY="539.0" mnemonicParsing="false" onAction="#backtomain_action" text="Back to main maneu">
+         <font>
+            <Font name="Papyrus" size="14.0" />
+         </font>
+      </Button>
+      <HBox layoutX="474.0" layoutY="125.0" prefHeight="380.0" prefWidth="291.0" spacing="15.0">
+         <children>
+            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="1.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="2.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="3.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="4.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="5.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="6.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="7.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="8.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="9.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="10.">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="100.0">
+               <children>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label text="&lt;Empty&gt;">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </VBox>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="mainmenu_pane" fx:id="mainmenu_pane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bomberman.Controller">
+   <children>
+      <VBox alignment="CENTER" layoutX="452.0" layoutY="119.0" prefHeight="427.0" prefWidth="323.0" spacing="50.0">
+         <children>
+            <Button id="buttonStartOnline" fx:id="buttonStartOnline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newonline_action" prefHeight="62.0" prefWidth="286.0" text="Start online game" textAlignment="CENTER">
+               <font>
+                  <Font name="Papyrus" size="22.0" />
+               </font>
+            </Button>
+            <Button id="buttonStartOffline" fx:id="ButtonStartOffline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newoffline_action" prefHeight="62.0" prefWidth="286.0" text="Start offline game" textAlignment="CENTER">
+               <font>
+                  <Font name="Papyrus" size="22.0" />
+               </font>
+            </Button>
+            <Button id="buttonConnectOnline" fx:id="buttonConnectOnline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#connectonline_action" prefHeight="62.0" prefWidth="286.0" text="Connect  to online game" textAlignment="CENTER">
+               <font>
+                  <Font name="Papyrus" size="22.0" />
+               </font>
+            </Button>
+            <Button id="buttonViewRanglist" fx:id="buttonViewRanglist" contentDisplay="CENTER" mnemonicParsing="false" onAction="#viewranglist_action" prefHeight="62.0" prefWidth="286.0" text="View ranglist" textAlignment="CENTER">
+               <font>
+                  <Font name="Papyrus" size="22.0" />
+               </font>
+            </Button>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
