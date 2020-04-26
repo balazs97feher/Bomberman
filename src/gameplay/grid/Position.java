@@ -6,4 +6,9 @@ package gameplay.grid;
 public class Position {
     protected int posX;
     protected int posY;
+
+    public Position(int x, int y){
+        posX=x;
+        posY=y;
+    }
 }

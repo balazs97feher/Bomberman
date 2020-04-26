@@ -1,15 +1,18 @@
 package gameplay.grid;
 
-public class Wall {
+public class Wall implements GridElement{
     protected Position position;
     protected boolean isDestructible;
 
-    public Wall(Position pos){
+    public Wall(Position pos, boolean destructible) {
         position=pos;
+        isDestructible=destructible;
     }
 
     protected void explode(){
-        // TODO
+        if(isDestructible){
+            // TODO
+        }
     }
 
 }

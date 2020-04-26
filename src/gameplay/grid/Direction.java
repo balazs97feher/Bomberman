@@ -1,7 +1,7 @@
 package gameplay.grid;
 
 /**
- *  enum to indicate in which direction a character is going
+ *  enum to indicate directions on the game grid
  */
 public enum Direction {
     NORTH,
