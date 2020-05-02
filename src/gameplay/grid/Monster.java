@@ -1,6 +1,6 @@
 package gameplay.grid;
 
-public class Monster extends Character{
+public class Monster extends Character implements GridElement{
     protected int id;
 
     public Monster(int monsterId, Position pos, Direction dir) {
@@ -30,5 +30,10 @@ public class Monster extends Character{
     @Override
     protected void die() {
         isAlive=false;
+    }
+
+    @Override
+    public ElementType getType() {
+        return ElementType.MONSTER;
     }
 }

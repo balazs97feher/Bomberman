@@ -17,8 +17,8 @@ public class GridFactory {
     }
 
     public Grid makeUniformGrid(){
-        ArrayList<ArrayList<GridElement>> elements = new ArrayList<ArrayList<GridElement>>(length);
-        for(int i=0; i<length; i++) elements.add(new ArrayList<GridElement>(width));
+        ArrayList<ArrayList<GridElement>> elements = new ArrayList<>(length);
+        for(int i=0; i<length; i++) elements.add(new ArrayList<>(width));
         for(int i=0;i<length;i++) for(int j=0;j<width;j++) elements.get(i).add(new EmptyElement());
 
         // top and bottom borders
@@ -39,12 +39,12 @@ public class GridFactory {
             }
 
         // for debugging
-        for (ArrayList<GridElement> row : elements) {
-            for(GridElement element : row){
-                System.out.println(element.getClass().getName() + " ");
-            }
-            System.out.println("\n");
-        }
+//        for (ArrayList<GridElement> row : elements) {
+//            for(GridElement element : row){
+//                System.out.println(element.getClass().getName() + " ");
+//            }
+//            System.out.println("\n");
+//        }
 
         return new Grid(length,width,elements);
     }

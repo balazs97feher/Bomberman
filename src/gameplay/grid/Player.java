@@ -1,13 +1,11 @@
 package gameplay.grid;
 
-public class Player extends Character {
+public class Player extends Character implements GridElement {
     protected String name;
-    protected int score;
 
     public Player(String charName, Position pos, Direction dir) {
         super(pos, dir);
         name=charName;
-        score=0;
     }
 
     @Override
@@ -21,4 +19,8 @@ public class Player extends Character {
     }
 
 
+    @Override
+    public ElementType getType() {
+        return ElementType.PLAYER;
+    }
 }

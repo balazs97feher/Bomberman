@@ -1,6 +1,6 @@
 package gameplay.grid;
 
-public class Bomb {
+public class Bomb implements GridElement{
     protected Position position;
     protected int range;
     protected int timeLeft;
@@ -20,4 +20,8 @@ public class Bomb {
     }
 
 
+    @Override
+    public ElementType getType() {
+        return ElementType.BOMB;
+    }
 }

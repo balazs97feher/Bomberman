@@ -15,4 +15,8 @@ public class Wall implements GridElement{
         }
     }
 
+    @Override
+    public ElementType getType() {
+        return ElementType.WALL;
+    }
 }
