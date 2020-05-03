@@ -1,10 +1,12 @@
-import gameplay.logic.gridfactory.GridFactory;
+import gameplay.logic.Game;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
 
-
-        GridFactory gridFactory=new GridFactory(7,5);
-        gridFactory.makeUniformGrid();
+        Game game = new Game();
+        game.initialize(new ArrayList<>(List.of("Eric","Bri","Adam")));
     }
 }

@@ -1,6 +1,6 @@
 package gameplay.grid;
 
-public class Player extends Character implements GridElement {
+public class Player extends Character{
     protected String name;
 
     public Player(String charName, Position pos, Direction dir) {

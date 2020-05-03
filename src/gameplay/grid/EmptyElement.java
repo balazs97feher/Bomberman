@@ -1,8 +1,18 @@
 package gameplay.grid;
 
-public class EmptyElement implements GridElement {
+public class EmptyElement extends GridElement {
+
+    public EmptyElement(Position pos) {
+        super(pos);
+    }
+
     @Override
     public ElementType getType() {
         return ElementType.EMPTY;
+    }
+
+    @Override
+    public Position getPosition() {
+        return null;
     }
 }

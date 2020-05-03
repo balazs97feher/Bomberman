@@ -1,6 +1,6 @@
 package gameplay.grid;
 
-public class Monster extends Character implements GridElement{
+public class Monster extends Character{
     protected int id;
 
     public Monster(int monsterId, Position pos, Direction dir) {

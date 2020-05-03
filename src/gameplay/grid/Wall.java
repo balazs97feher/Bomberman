@@ -1,11 +1,11 @@
 package gameplay.grid;
 
-public class Wall implements GridElement{
+public class Wall extends GridElement{
     protected Position position;
     protected boolean isDestructible;
 
     public Wall(Position pos, boolean destructible) {
-        position=pos;
+        super(pos);
         isDestructible=destructible;
     }
 
@@ -18,5 +18,10 @@ public class Wall implements GridElement{
     @Override
     public ElementType getType() {
         return ElementType.WALL;
+    }
+
+    @Override
+    public Position getPosition() {
+        return position;
     }
 }

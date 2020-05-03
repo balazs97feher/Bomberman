@@ -1,5 +1,12 @@
 package gameplay.grid;
 
-public interface GridElement {
-    ElementType getType();
+public abstract class GridElement {
+    protected Position position;
+
+    public GridElement(Position pos){
+        position = pos;
+    }
+
+    public abstract ElementType getType();
+    public abstract Position getPosition();
 }
