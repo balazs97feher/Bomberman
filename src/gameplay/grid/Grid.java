@@ -34,7 +34,7 @@ public class Grid {
      * @return
      */
     static public int manhattanDistance(Position first, Position second){
-        return Math.abs(first.posX-second.posX)+Math.abs(first.posY-second.posX);
+        return Math.abs(first.posX-second.posX)+Math.abs(first.posY-second.posY);
     }
 
     /**

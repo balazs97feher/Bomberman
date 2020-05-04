@@ -1,4 +1,4 @@
-package gameplay.logic.gridfactory;
+package gameplay.logic;
 
 import gameplay.grid.*;
 
