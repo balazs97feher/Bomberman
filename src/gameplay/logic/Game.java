@@ -1,10 +1,12 @@
 package gameplay.logic;
 
 import gameplay.grid.*;
+import gameplay.logic.event.GameEvent;
 import gameplay.logic.exception.EquivalentPlayerNamesException;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class Game {
     protected HashMap<String,Integer> playerScores;
@@ -19,9 +21,11 @@ public class Game {
     private Controller controller;
     private boolean isRunning;
 
+    public ConcurrentLinkedQueue<GameEvent> eventPump;
+    public ConcurrentLinkedQueue<GameEvent> eventSink;
+
 
     public Game(){
-        controller = new Controller(this);
         levelNumber = 0;
         isRunning = false;
     }
@@ -40,31 +44,27 @@ public class Game {
         }
 
         levelFactory = new LevelFactory(new ArrayList<>(playerScores.keySet()),gridLength,gridWidth);
-
-        run();
+        eventPump = new ConcurrentLinkedQueue<>();
+        eventSink = new ConcurrentLinkedQueue<>();
     }
 
-    private void initializeNextLevel(){
+    public void initializeNextLevel(){
         levelNumber++;
         level = levelFactory.makeLevel(levelNumber);
+
+        eventPump.clear();
+        eventSink.clear();
 
         level.grid.printGrid();
     }
 
-
-    private void run(){
-        isRunning = true;
-        while(isRunning){
-            initializeNextLevel();
-
-
-
-
-            isRunning = false; // debug
-        }
-
+    public void startLevel(){
+            controller = new Controller(playerScores, level, eventPump, eventSink);
+            Thread levelThread = new Thread(controller);
+            levelThread.start();
 
     }
+
 
 
 
