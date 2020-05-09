@@ -12,9 +12,11 @@ public class Main {
         game.initializeNextLevel();
         game.startLevel();
 
-//        while(game.eventPump.isEmpty()){}
-//        GameEvent e = game.eventPump.poll();
-//        System.out.println(e.getEventType().toString());
+        while(game.isRunning()){
+            GameEvent e = game.pollEventPump();
+            if (e != null) System.out.println(e.getEventType().toString());
+        }
+
 
 
     }

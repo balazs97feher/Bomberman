@@ -11,8 +11,4 @@ public class EmptyElement extends GridElement {
         return ElementType.EMPTY;
     }
 
-    @Override
-    public Position getPosition() {
-        return null;
-    }
 }

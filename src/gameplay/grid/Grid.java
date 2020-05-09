@@ -14,7 +14,7 @@ public class Grid {
     }
 
     public void addCharacter(Character character){
-        elements.get(character.position.posX).set(character.position.posY,character);
+        elements.get(character.position.posY).set(character.position.posX,character);
     }
 
     /**
@@ -43,7 +43,38 @@ public class Grid {
      * @return
      */
     public GridElement getElement(Position position){
-        return elements.get(position.posX).get(position.posY);
+        return elements.get(position.posY).get(position.posX);
+    }
+
+    public void setElement(GridElement element, Position position) {
+        elements.get(position.posY).set(position.posX,element);
+        element.setPosition(position);
+    }
+
+    /**
+     * returns the specified neighbor grid element of the input gird element
+     * @param position
+     * @param direction
+     * @return
+     */
+    public GridElement getNeighbor(Position position,Direction direction) {
+        try{
+            switch (direction){
+                case NORTH:
+                    return elements.get(position.posY-1).get(position.posX);
+                case EAST:
+                    return elements.get(position.posY).get(position.posX+1);
+                case SOUTH:
+                    return elements.get(position.posY+1).get(position.posX);
+                case WEST:
+                    return elements.get(position.posY).get(position.posX-1);
+                default:
+                    return null;
+            }
+        }
+        catch (Exception e){
+            return null;
+        }
     }
 
     public void printGrid(){

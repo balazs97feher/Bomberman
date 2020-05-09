@@ -5,12 +5,12 @@ public class Monster extends Character{
 
     public Monster(int monsterId, Position pos, Direction dir) {
         super(pos, dir);
-        id=monsterId;
+        id = monsterId;
     }
 
 
     @Override
-    protected void move(Direction dir) {
+    public void move(Direction dir) {
         switch (dir){
             case NORTH:
                 position.posY--;
@@ -27,8 +27,12 @@ public class Monster extends Character{
         }
     }
 
+    public int getId(){
+        return id;
+    }
+
     @Override
-    protected void die() {
+    public void die() {
         isAlive=false;
     }
 

@@ -6,14 +6,14 @@ public abstract class Character extends GridElement{
 
     public Character(Position pos, Direction dir){
         super(pos);
-        direction=dir;
+        direction = dir;
+        isAlive = true;
     }
 
-    abstract protected void move(Direction dir);
-    abstract protected void die();
+    abstract public void move(Direction dir);
+    abstract public void die();
 
-    @Override
-    public Position getPosition(){
-        return position;
+    public Direction getDirection(){
+        return direction;
     }
 }

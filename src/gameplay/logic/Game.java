@@ -12,22 +12,26 @@ public class Game {
     protected HashMap<String,Integer> playerScores;
 
     private LevelFactory levelFactory;
-    protected Level level;
-    protected int levelNumber;
+    private Level level;
+    private int levelNumber;
 
     final private int gridLength = 5;
     final private int gridWidth = 9;
 
     private Controller controller;
-    private boolean isRunning;
+    private GameFlag gameFlag; // flag that indicates that a level is in progress
 
-    public ConcurrentLinkedQueue<GameEvent> eventPump;
+    private ConcurrentLinkedQueue<GameEvent> eventPump;
     public ConcurrentLinkedQueue<GameEvent> eventSink;
 
 
     public Game(){
         levelNumber = 0;
-        isRunning = false;
+        gameFlag = new GameFlag(false);
+    }
+
+    public boolean isRunning(){
+        return (gameFlag.isRunning || !eventPump.isEmpty());
     }
 
     /**
@@ -59,10 +63,15 @@ public class Game {
     }
 
     public void startLevel(){
-            controller = new Controller(playerScores, level, eventPump, eventSink);
+            controller = new Controller(playerScores, level, eventPump, eventSink, gameFlag);
             Thread levelThread = new Thread(controller);
+            gameFlag.isRunning = true;
             levelThread.start();
 
+    }
+
+    public GameEvent pollEventPump(){
+        return eventPump.poll();
     }
 
 

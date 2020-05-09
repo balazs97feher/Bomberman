@@ -14,7 +14,7 @@ public class MonsterMovedEvent implements GameEvent{
     }
 
     @Override
-    public EventType getEventType() {
-        return EventType.MONSTER_MOVED;
+    public GameEventType getEventType() {
+        return GameEventType.MONSTER_MOVED;
     }
 }

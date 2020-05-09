@@ -5,16 +5,16 @@ public class Player extends Character{
 
     public Player(String charName, Position pos, Direction dir) {
         super(pos, dir);
-        name=charName;
+        name = charName;
     }
 
     @Override
-    protected void move(Direction dir) {
+    public void move(Direction dir) {
         // TODO
     }
 
     @Override
-    protected void die() {
+    public void die() {
         isAlive=false;
     }
 

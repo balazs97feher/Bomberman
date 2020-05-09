@@ -8,5 +8,12 @@ public abstract class GridElement {
     }
 
     public abstract ElementType getType();
-    public abstract Position getPosition();
+
+    public Position getPosition() {
+        return position;
+    }
+
+    protected void setPosition(Position newPosition){
+        position = newPosition;
+    }
 }

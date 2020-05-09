@@ -6,7 +6,7 @@ public class Wall extends GridElement{
 
     public Wall(Position pos, boolean destructible) {
         super(pos);
-        isDestructible=destructible;
+        isDestructible = destructible;
     }
 
     protected void explode(){
@@ -18,10 +18,5 @@ public class Wall extends GridElement{
     @Override
     public ElementType getType() {
         return ElementType.WALL;
-    }
-
-    @Override
-    public Position getPosition() {
-        return position;
     }
 }
