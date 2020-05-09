@@ -1,11 +1,20 @@
 package gameplay.grid;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Grid {
     protected int length;
     protected int width;
     public ArrayList<ArrayList<GridElement>> elements;
+
+    // an array to easily iterate through all the directions
+    public static final ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST));
+    // a map to quickly find a directions opposite
+    public static final Map<Direction,Direction> oppositeDirections =
+        Map.of(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH, Direction.WEST, Direction.EAST);
 
     public Grid(int l, int w, ArrayList<ArrayList<GridElement>> gridElements){
         length = l;

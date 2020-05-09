@@ -1,3 +1,4 @@
+import gameplay.grid.Direction;
 import gameplay.logic.Game;
 import gameplay.logic.event.GameEvent;
 
@@ -14,7 +15,7 @@ public class Main {
 
         while(game.isRunning()){
             GameEvent e = game.pollEventPump();
-            if (e != null) System.out.println(e.getEventType().toString());
+//            if (e != null) System.out.println(e.getEventType().toString());
         }
 
 

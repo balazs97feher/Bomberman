@@ -16,4 +16,7 @@ public abstract class Character extends GridElement{
     public Direction getDirection(){
         return direction;
     }
+    public void setDirection(Direction dir){
+        direction = dir;
+    }
 }
