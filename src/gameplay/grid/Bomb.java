@@ -1,14 +1,19 @@
 package gameplay.grid;
 
 public class Bomb extends GridElement{
+    private int id;
+    private static int nextId = 0;
+
     protected int range;
     protected int timeLeft;
 
     public Bomb(Position pos, int bombRange, int time){
         super(pos);
-        position=pos;
-        range=bombRange;
-        timeLeft=time;
+        position = pos;
+        range = bombRange;
+        timeLeft = time;
+        id = nextId;
+        nextId++;
     }
 
     protected void explode(){
@@ -25,8 +30,4 @@ public class Bomb extends GridElement{
         return ElementType.BOMB;
     }
 
-    @Override
-    public Position getPosition() {
-        return position;
-    }
 }

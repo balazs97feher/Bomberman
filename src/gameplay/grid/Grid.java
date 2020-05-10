@@ -55,7 +55,7 @@ public class Grid {
         return elements.get(position.posY).get(position.posX);
     }
 
-    public void setElement(GridElement element, Position position) {
+    public void setElement(Position position, GridElement element) {
         elements.get(position.posY).set(position.posX,element);
         element.setPosition(position);
     }

@@ -58,7 +58,7 @@ public class LevelFactory {
 
         level.monsters = new ArrayList<>();
 
-        for(int monsterCount=0; monsterCount < level.levelNumber; monsterCount++){ // 2*N monsters on level N
+        for(int monsterCount=0; monsterCount < level.levelNumber*2; monsterCount++){ // 2*N monsters on level N
             placedOne = false;
 
             while(!placedOne){
@@ -71,7 +71,7 @@ public class LevelFactory {
                         break;
                     }
                     if(!tooClose){
-                        level.monsters.add(new Monster(monsterCount,pick,Direction.NORTH)); // then add monster
+                        level.monsters.add(new Monster(pick,Direction.NORTH)); // then add monster
                         level.grid.addCharacter(level.monsters.get(monsterCount));
                         placedOne = true;
                     }

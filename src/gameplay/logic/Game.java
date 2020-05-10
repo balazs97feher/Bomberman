@@ -2,6 +2,7 @@ package gameplay.logic;
 
 import gameplay.grid.*;
 import gameplay.logic.event.GameEvent;
+import gameplay.logic.event.MovePlayerEvent;
 import gameplay.logic.exception.EquivalentPlayerNamesException;
 
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class Game {
     private GameFlag gameFlag; // flag that indicates that a level is in progress
 
     private ConcurrentLinkedQueue<GameEvent> eventPump;
-    public ConcurrentLinkedQueue<GameEvent> eventSink;
+    private ConcurrentLinkedQueue<GameEvent> eventSink;
 
 
     public Game(){
@@ -87,12 +88,12 @@ public class Game {
     }
 
     /**
-     * function to move a player on the grid
+     * function to request to move a player on the grid
      * @param name name of the player to  move
      * @param dir in which direction to move
      */
     public void movePlayer(String name, Direction dir){
-        // TODO
+        eventSink.add(new MovePlayerEvent(name,dir));
     }
 
     /**

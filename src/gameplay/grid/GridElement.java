@@ -13,7 +13,7 @@ public abstract class GridElement {
         return position;
     }
 
-    protected void setPosition(Position newPosition){
+    public void setPosition(Position newPosition){
         position = newPosition;
     }
 }

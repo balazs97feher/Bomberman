@@ -10,7 +10,6 @@ public abstract class Character extends GridElement{
         isAlive = true;
     }
 
-    abstract public void move(Direction dir);
     abstract public void die();
 
     public Direction getDirection(){

@@ -88,9 +88,9 @@ public class Controller implements Runnable{
 
             eventPump.add(new MonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition()));
             Position monsterPosition = monster.getPosition();
-            level.grid.setElement(monster,neighbor.getPosition());
+            level.grid.setElement(neighbor.getPosition(), monster);
             monster.setDirection(setDirection);
-            level.grid.setElement(neighbor,monsterPosition);
+            level.grid.setElement(monsterPosition, neighbor);
         }
     }
 
@@ -101,6 +101,10 @@ public class Controller implements Runnable{
 
     public void handleEventSink(){
 //        System.out.println("handling event sink");
+        GameEvent next = eventSink.poll();
+        if(next != null){
+            System.out.println("outside event handled");
+        }
     }
 
 

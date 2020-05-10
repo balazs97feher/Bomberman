@@ -1,31 +1,15 @@
 package gameplay.grid;
 
 public class Monster extends Character{
-    protected int id;
+    private int id;
+    private static int nextId = 0;
 
-    public Monster(int monsterId, Position pos, Direction dir) {
+    public Monster(Position pos, Direction dir) {
         super(pos, dir);
-        id = monsterId;
+        id = nextId;
+        nextId++;
     }
 
-
-    @Override
-    public void move(Direction dir) {
-        switch (dir){
-            case NORTH:
-                position.posY--;
-                break;
-            case EAST:
-                position.posX++;
-                break;
-            case SOUTH:
-                position.posY++;
-                break;
-            case WEST:
-                position.posX--;
-                break;
-        }
-    }
 
     public int getId(){
         return id;
@@ -33,7 +17,7 @@ public class Monster extends Character{
 
     @Override
     public void die() {
-        isAlive=false;
+        isAlive = false;
     }
 
     @Override
