@@ -1,2 +1,6 @@
 # Project exclude paths
 /out/
+/GamePlayLogger
+/GamePlayLogger.lck
+/GameLogger
+/GameLogger.lck

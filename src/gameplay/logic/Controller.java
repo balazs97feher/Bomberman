@@ -2,7 +2,7 @@ package gameplay.logic;
 
 import gameplay.grid.*;
 import gameplay.logic.event.GameEvent;
-import gameplay.logic.event.MonsterMovedEvent;
+import gameplay.logic.event.GameEventFactory;
 import gameplay.logic.schedule.HandleEventSink;
 import gameplay.logic.schedule.HandleMonsters;
 
@@ -20,6 +20,7 @@ public class Controller implements Runnable{
     private ConcurrentLinkedQueue<GameEvent> eventSink;
 
     private GameFlag gameFlag;
+    private GameEventFactory eventFactory;
 
 
 
@@ -29,6 +30,7 @@ public class Controller implements Runnable{
         eventPump = pump;
         eventSink = sink;
         gameFlag = flag;
+        eventFactory = new GameEventFactory();
     }
 
     @Override
@@ -86,7 +88,8 @@ public class Controller implements Runnable{
             else setDirection = freeDirections.get(randomGenerator.nextInt(freeDirections.size())); // if cannot go ahead, then turn randomly
             GridElement neighbor = level.grid.getNeighbor(monster.getPosition(),setDirection);
 
-            eventPump.add(new MonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition()));
+            eventPump.add(eventFactory.createMonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition()));
+
             Position monsterPosition = monster.getPosition();
             level.grid.setElement(neighbor.getPosition(), monster);
             monster.setDirection(setDirection);

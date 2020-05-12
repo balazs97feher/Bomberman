@@ -11,4 +11,12 @@ public class Position {
         posY = y;
         posX = x;
     }
+
+    @Override
+    public String toString() {
+        return "{" +
+            "posY=" + posY +
+            ", posX=" + posX +
+            '}';
+    }
 }

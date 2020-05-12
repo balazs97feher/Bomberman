@@ -1,6 +1,9 @@
 package gameplay.logic.event;
 
+import gameplay.LoggerMan;
 import gameplay.grid.Position;
+
+import java.util.logging.Level;
 
 public class MonsterMovedEvent implements GameEvent{
     private int monsterId;
@@ -28,5 +31,14 @@ public class MonsterMovedEvent implements GameEvent{
 
     public Position getNewPosition() {
         return newPosition;
+    }
+
+    @Override
+    public String toString() {
+        return "MonsterMovedEvent{" +
+            "monsterId=" + monsterId +
+            ", previousPosition=" + previousPosition.toString() +
+            ", newPosition=" + newPosition.toString() +
+            '}';
     }
 }
