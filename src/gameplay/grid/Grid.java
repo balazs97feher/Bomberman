@@ -8,11 +8,11 @@ import java.util.Map;
 public class Grid {
     protected int length;
     protected int width;
-    public ArrayList<ArrayList<GridElement>> elements;
+    protected ArrayList<ArrayList<GridElement>> elements;
 
     // an array to easily iterate through all the directions
     public static final ArrayList<Direction> directions = new ArrayList<>(Arrays.asList(Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST));
-    // a map to quickly find a directions opposite
+    // a map to quickly find a direction's opposite
     public static final Map<Direction,Direction> oppositeDirections =
         Map.of(Direction.NORTH, Direction.SOUTH, Direction.EAST, Direction.WEST, Direction.SOUTH, Direction.NORTH, Direction.WEST, Direction.EAST);
 
@@ -20,6 +20,10 @@ public class Grid {
         length = l;
         width = w;
         elements = gridElements;
+    }
+
+    public ArrayList<ArrayList<GridElement>> getElements(){
+        return elements;
     }
 
     public void addCharacter(Character character){
@@ -55,9 +59,25 @@ public class Grid {
         return elements.get(position.posY).get(position.posX);
     }
 
+    /**
+     * sets the specified element at the specified position on the grid
+     * @param position
+     * @param element
+     */
     public void setElement(Position position, GridElement element) {
         elements.get(position.posY).set(position.posX,element);
         element.setPosition(position);
+    }
+
+    /**
+     * swaps the two specified elements on the grid
+     * @param first
+     * @param second
+     */
+    public void swapElements(GridElement first, GridElement second){
+        Position firstPosition = first.getPosition();
+        setElement(second.getPosition(), first);
+        setElement(firstPosition, second);
     }
 
     /**

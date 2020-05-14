@@ -26,4 +26,12 @@ public class MovePlayerEvent implements GameEvent {
     public Direction getDirection() {
         return direction;
     }
+
+    @Override
+    public String toString() {
+        return "MovePlayerEvent{" +
+            "playerName='" + playerName + '\'' +
+            ", direction=" + direction +
+            '}';
+    }
 }

@@ -53,7 +53,11 @@ public class Game {
         eventSink = new ConcurrentLinkedQueue<>();
     }
 
-    public void initializeNextLevel(){
+    /**
+     * initialize the next level and return the initial state of the grid for other subsystems (e.g. UI)
+     * @return
+     */
+    public ArrayList<ArrayList<GridElement>> initializeNextLevel(){
         levelNumber++;
         level = levelFactory.makeLevel(levelNumber);
 
@@ -61,8 +65,14 @@ public class Game {
         eventSink.clear();
 
         level.grid.printGrid();
+
+        return level.grid.getElements();
     }
 
+    /**
+     * set the isRunning game flag to true and start the level
+     * after this, expect events to appear in the event pump
+     */
     public void startLevel(){
             controller = new Controller(playerScores, level, eventPump, eventSink, gameFlag);
             Thread levelThread = new Thread(controller);
@@ -77,15 +87,6 @@ public class Game {
 
 
 
-
-
-
-    /**
-     * Print the current content of the grid
-     */
-    public void snapShot(){
-        level.grid.printGrid();
-    }
 
     /**
      * function to request to move a player on the grid

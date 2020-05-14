@@ -16,6 +16,8 @@ public class Player extends Character{
         return id;
     }
 
+    public String getName() { return name; }
+
     @Override
     public void die() {
         isAlive = false;

@@ -3,10 +3,7 @@ package gameplay.logic.event;
 import gameplay.grid.Position;
 
 import java.io.IOException;
-import java.util.logging.FileHandler;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import java.util.logging.SimpleFormatter;
+import java.util.logging.*;
 
 /**
  * factory to create and log game events
@@ -19,7 +16,8 @@ public class GameEventFactory {
 
         try {
             FileHandler fileHandler = new FileHandler(gameEventLogger.getName());
-            SimpleFormatter formatter = new SimpleFormatter();
+//            SimpleFormatter formatter = new SimpleFormatter();
+            XMLFormatter formatter = new XMLFormatter();
             fileHandler.setFormatter(formatter);
             gameEventLogger.addHandler(fileHandler);
 
@@ -32,6 +30,12 @@ public class GameEventFactory {
 
     public MonsterMovedEvent createMonsterMovedEvent(int monsterId, Position previousPos, Position nextPos){
         MonsterMovedEvent e = new MonsterMovedEvent(monsterId,previousPos,nextPos);
+        gameEventLogger.log(Level.INFO,e.toString());
+        return e;
+    }
+
+    public PlayerMovedEvent createPlayerMovedEvent(int playerId, Position previousPos, Position nextPos){
+        PlayerMovedEvent e =  new PlayerMovedEvent(playerId,previousPos,nextPos);
         gameEventLogger.log(Level.INFO,e.toString());
         return e;
     }

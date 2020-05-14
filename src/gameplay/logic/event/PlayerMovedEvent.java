@@ -2,24 +2,24 @@ package gameplay.logic.event;
 
 import gameplay.grid.Position;
 
-public class MonsterMovedEvent implements GameEvent{
-    private int monsterId;
+public class PlayerMovedEvent implements GameEvent {
+    private int playerId;
     private Position previousPosition;
     private Position newPosition;
 
-    public MonsterMovedEvent(int id, Position previousPos, Position newPos){
-        monsterId = id;
+    public PlayerMovedEvent(int id, Position previousPos, Position newPos){
+        playerId = id;
         previousPosition = previousPos;
         newPosition = newPos;
     }
 
     @Override
     public GameEventType getEventType() {
-        return GameEventType.MONSTER_MOVED;
+        return GameEventType.PLAYER_MOVED;
     }
 
-    public int getMonsterId() {
-        return monsterId;
+    public int getPlayerId() {
+        return playerId;
     }
 
     public Position getPreviousPosition() {
@@ -32,8 +32,8 @@ public class MonsterMovedEvent implements GameEvent{
 
     @Override
     public String toString() {
-        return "MonsterMovedEvent{" +
-            "monsterId=" + monsterId +
+        return "PlayerMovedEvent{" +
+            "playerId=" + playerId +
             ", previousPosition=" + previousPosition.toString() +
             ", newPosition=" + newPosition.toString() +
             '}';

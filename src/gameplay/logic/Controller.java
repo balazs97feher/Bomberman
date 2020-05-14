@@ -1,8 +1,10 @@
 package gameplay.logic;
 
+import gameplay.LoggerMan;
 import gameplay.grid.*;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.GameEventFactory;
+import gameplay.logic.event.MovePlayerEvent;
 import gameplay.logic.schedule.HandleEventSink;
 import gameplay.logic.schedule.HandleMonsters;
 
@@ -11,6 +13,7 @@ import java.util.HashMap;
 import java.util.Random;
 import java.util.Timer;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
 
 public class Controller implements Runnable{
     private HashMap<String,Integer> playerScores;
@@ -90,10 +93,8 @@ public class Controller implements Runnable{
 
             eventPump.add(eventFactory.createMonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition()));
 
-            Position monsterPosition = monster.getPosition();
-            level.grid.setElement(neighbor.getPosition(), monster);
+            level.grid.swapElements(monster,neighbor);
             monster.setDirection(setDirection);
-            level.grid.setElement(monsterPosition, neighbor);
         }
     }
 
@@ -102,13 +103,53 @@ public class Controller implements Runnable{
 
 
 
-    public void handleEventSink(){
-//        System.out.println("handling event sink");
+    public void handleEventSink() {
+        System.out.println("handling event sink");
         GameEvent next = eventSink.poll();
         if(next != null){
-            System.out.println("outside event handled");
+            switch (next.getEventType()){
+                case MOVE_PLAYER:
+                    MovePlayerEvent e = (MovePlayerEvent)next;
+                    movePlayer(e.getPlayerName(),e.getDirection());
+                    break;
+                default:
+                    LoggerMan.log(java.util.logging.Level.WARNING, "Unable to handle event from event sink.");
+            }
         }
     }
+
+    private void movePlayer(String playerName, Direction direction){
+        Player player = null;
+        for(Player p : level.players) if(p.getName().equals(playerName)) {
+            player = p;
+            break;
+        }
+
+        if(player == null){
+            LoggerMan.log(java.util.logging.Level.SEVERE,"No such player in this game.");
+            throw new NullPointerException("No such player in this game.");
+        }
+        else{
+            GridElement neighbor = level.grid.getNeighbor(player.getPosition(),direction);
+            if(neighbor != null && neighbor.getType() == ElementType.EMPTY){
+                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),player.getPosition(),neighbor.getPosition()));
+
+                level.grid.swapElements(player,neighbor);
+                player.setDirection(direction);
+            }
+            else{
+                LoggerMan.log(java.util.logging.Level.INFO, "Player: " + player.getName() + " cannot move in direction: "
+                    + direction.toString() + " from " + player.getPosition().toString());
+            }
+        }
+
+    }
+
+
+
+
+
+
 
 
 }
