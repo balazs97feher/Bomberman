@@ -15,7 +15,7 @@ public class Level {
 
     protected int levelNumber;
 
-    public Level(int levelNo, Grid g){
+    protected Level(int levelNo, Grid g){
         levelNumber = levelNo;
         grid = g;
     }

@@ -47,10 +47,10 @@ public class Controller implements Runnable{
 
 
 
-        while(true){}
-//        timer.cancel();
-//        System.out.println("level completed");
-//        gameFlag.isRunning = false;
+        while(!gameFlag.terminated){}
+        timer.cancel();
+        System.out.println("level completed");
+        gameFlag.running = false;
     }
 
     public void handleMonsters(){
@@ -97,6 +97,8 @@ public class Controller implements Runnable{
             monster.setDirection(setDirection);
         }
     }
+
+
 
 
 

@@ -1,9 +1,11 @@
 package gameplay.logic;
 
 public class GameFlag {
-    public boolean isRunning;
+    public boolean running;
+    public boolean terminated;
 
-    public GameFlag(boolean running){
-        isRunning = false;
+    public GameFlag(){
+        running = false;
+        terminated = false;
     }
 }

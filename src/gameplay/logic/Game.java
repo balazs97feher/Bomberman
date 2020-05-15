@@ -1,5 +1,6 @@
 package gameplay.logic;
 
+import gameplay.LoggerMan;
 import gameplay.grid.*;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.MovePlayerEvent;
@@ -28,11 +29,11 @@ public class Game {
 
     public Game(){
         levelNumber = 0;
-        gameFlag = new GameFlag(false);
+        gameFlag = new GameFlag();
     }
 
     public boolean isRunning(){
-        return (gameFlag.isRunning || !eventPump.isEmpty());
+        return (gameFlag.running || !eventPump.isEmpty());
     }
 
     /**
@@ -70,19 +71,23 @@ public class Game {
     }
 
     /**
-     * set the isRunning game flag to true and start the level
+     * set the running game flag to true and start the level
      * after this, expect events to appear in the event pump
      */
     public void startLevel(){
             controller = new Controller(playerScores, level, eventPump, eventSink, gameFlag);
             Thread levelThread = new Thread(controller);
-            gameFlag.isRunning = true;
+            gameFlag.running = true;
             levelThread.start();
-
     }
 
     public GameEvent pollEventPump(){
         return eventPump.poll();
+    }
+
+    public void terminate(){
+        gameFlag.terminated = true;
+        LoggerMan.log(java.util.logging.Level.WARNING,"Game has been terminated.");
     }
 
 
