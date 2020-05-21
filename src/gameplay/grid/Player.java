@@ -2,7 +2,6 @@ package gameplay.grid;
 
 public class Player extends Character{
     protected String name;
-    private int id;
     private static int nextId = 0;
 
     public Player(String charName, Position pos, Direction dir) {
@@ -17,11 +16,6 @@ public class Player extends Character{
     }
 
     public String getName() { return name; }
-
-    @Override
-    public void die() {
-        isAlive = false;
-    }
 
     @Override
     public ElementType getType() {

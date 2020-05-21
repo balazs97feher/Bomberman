@@ -4,6 +4,9 @@ import gameplay.logic.Controller;
 
 import java.util.TimerTask;
 
+/**
+ * class to facilitate the scheduled handling of the event sink
+ */
 public class HandleEventSink extends TimerTask {
     private Controller controller;
 

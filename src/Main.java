@@ -16,6 +16,7 @@ public class Main {
         game.startLevel();
 
         game.movePlayer("Adam", Direction.EAST);
+        game.movePlayer("Adam", Direction.SOUTH);
         while(game.isRunning()){
             GameEvent e = game.pollEventPump();
 //            if (e != null) System.out.println(e.getEventType().toString());

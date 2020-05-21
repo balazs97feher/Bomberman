@@ -1,5 +1,6 @@
 package test;
 
+import gameplay.LoggerMan;
 import gameplay.grid.Direction;
 import gameplay.grid.Grid;
 import gameplay.logic.Game;
@@ -16,6 +17,7 @@ public class ControllerDriver {
 
     @Test
     public void playerIsAbleToMoveEastFromUpperWestCorner(){
+        LoggerMan.initialize();
         ArrayList<String> player = new ArrayList<>(List.of("Christoph"));
 
         Game game = new Game();
@@ -30,8 +32,11 @@ public class ControllerDriver {
         int counter = 0; // the player moved event should arise among the first 10 events
         while(expectedEvent == null && counter < 10){
             polledEvent = game.pollEventPump();
-            if(polledEvent != null && polledEvent.getEventType() == GameEventType.PLAYER_MOVED) expectedEvent = (PlayerMovedEvent)polledEvent;
-            counter++;
+            if(polledEvent != null){
+                counter++;
+                if(polledEvent.getEventType() == GameEventType.PLAYER_MOVED) expectedEvent = (PlayerMovedEvent)polledEvent;
+            }
+            polledEvent = null;
         }
         game.terminate();
 

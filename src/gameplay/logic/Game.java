@@ -4,6 +4,7 @@ import gameplay.LoggerMan;
 import gameplay.grid.*;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.MovePlayerEvent;
+import gameplay.logic.event.PlaceBombEvent;
 import gameplay.logic.exception.EquivalentPlayerNamesException;
 
 import java.util.ArrayList;
@@ -99,7 +100,9 @@ public class Game {
      * @param dir in which direction to move
      */
     public void movePlayer(String name, Direction dir){
-        eventSink.add(new MovePlayerEvent(name,dir));
+        MovePlayerEvent e = new MovePlayerEvent(name,dir);
+        eventSink.add(e);
+        LoggerMan.log(java.util.logging.Level.INFO,e.toString());
     }
 
     /**
@@ -107,7 +110,9 @@ public class Game {
      * @param name name of the player to place the bomb
      */
     public void placeBomb(String name){
-        // TODO
+        PlaceBombEvent e = new PlaceBombEvent(name);
+        eventSink.add(e);
+        LoggerMan.log(java.util.logging.Level.INFO,e.toString());
     }
 
 

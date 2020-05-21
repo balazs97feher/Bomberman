@@ -4,6 +4,9 @@ import gameplay.logic.Controller;
 
 import java.util.TimerTask;
 
+/**
+ * class to facilitate the scheduled moving of monsters
+ */
 public class HandleMonsters extends TimerTask {
     private Controller controller;
 

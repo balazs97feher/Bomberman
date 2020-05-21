@@ -5,6 +5,7 @@ import gameplay.grid.*;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.GameEventFactory;
 import gameplay.logic.event.MovePlayerEvent;
+import gameplay.logic.event.PlaceBombEvent;
 import gameplay.logic.schedule.HandleEventSink;
 import gameplay.logic.schedule.HandleMonsters;
 
@@ -42,10 +43,6 @@ public class Controller implements Runnable{
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new HandleMonsters(this),0,1000);
         timer.scheduleAtFixedRate(new HandleEventSink(this),0,1000);
-
-
-
-
 
         while(!gameFlag.terminated){}
         timer.cancel();
@@ -111,8 +108,12 @@ public class Controller implements Runnable{
         if(next != null){
             switch (next.getEventType()){
                 case MOVE_PLAYER:
-                    MovePlayerEvent e = (MovePlayerEvent)next;
-                    movePlayer(e.getPlayerName(),e.getDirection());
+                    MovePlayerEvent e1 = (MovePlayerEvent)next;
+                    movePlayer(e1.getPlayerName(),e1.getDirection());
+                    break;
+                case PLACE_BOMB:
+                    PlaceBombEvent e2 = (PlaceBombEvent) next;
+                    placeBomb(e2.getPlayerName());
                     break;
                 default:
                     LoggerMan.log(java.util.logging.Level.WARNING, "Unable to handle event from event sink.");
@@ -121,11 +122,7 @@ public class Controller implements Runnable{
     }
 
     private void movePlayer(String playerName, Direction direction){
-        Player player = null;
-        for(Player p : level.players) if(p.getName().equals(playerName)) {
-            player = p;
-            break;
-        }
+        Player player = findPlayer(playerName);
 
         if(player == null){
             LoggerMan.log(java.util.logging.Level.SEVERE,"No such player in this game.");
@@ -144,14 +141,32 @@ public class Controller implements Runnable{
                     + direction.toString() + " from " + player.getPosition().toString());
             }
         }
+    }
 
+    private void placeBomb(String playerName){
+        Player player = findPlayer(playerName);
+        if(player == null){
+            LoggerMan.log(java.util.logging.Level.SEVERE,"No such player in this game.");
+            throw new NullPointerException("No such player in this game.");
+        }
+        else{
+            // TODO
+
+
+
+        }
     }
 
 
 
 
-
-
-
+    private Player findPlayer(String name){
+        Player player = null;
+        for(Player p : level.players) if(p.getName().equals(name)) {
+            player = p;
+            break;
+        }
+        return player;
+    }
 
 }

@@ -1,7 +1,6 @@
 package gameplay.grid;
 
 public class Monster extends Character{
-    private int id;
     private static int nextId = 0;
 
     public Monster(Position pos, Direction dir) {
@@ -13,11 +12,6 @@ public class Monster extends Character{
 
     public int getId(){
         return id;
-    }
-
-    @Override
-    public void die() {
-        isAlive = false;
     }
 
     @Override
