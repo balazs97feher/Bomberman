@@ -7,11 +7,11 @@ public class Bomb extends GridElement{
     protected int range;
     protected int timeLeft;
 
-    public Bomb(Position pos, int bombRange, int time){
+    public Bomb(Position pos){
         super(pos);
         position = pos;
-        range = bombRange;
-        timeLeft = time;
+        range = 2;
+        timeLeft = 2;
         id = nextId;
         nextId++;
     }

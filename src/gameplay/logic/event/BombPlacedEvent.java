@@ -2,7 +2,7 @@ package gameplay.logic.event;
 
 import gameplay.grid.Position;
 
-public class BombPlacedEvent {
+public class BombPlacedEvent implements GameEvent{
     private Position position;
 
     public BombPlacedEvent(Position pos){
@@ -11,6 +11,11 @@ public class BombPlacedEvent {
 
     public Position getPosition() {
         return position;
+    }
+
+    @Override
+    public GameEventType getEventType() {
+        return GameEventType.BOMB_PLACED;
     }
 
     @Override

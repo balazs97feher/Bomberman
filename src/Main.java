@@ -1,5 +1,4 @@
 import gameplay.LoggerMan;
-import gameplay.grid.Direction;
 import gameplay.logic.Game;
 import gameplay.logic.event.GameEvent;
 
@@ -15,8 +14,9 @@ public class Main {
         game.initializeNextLevel();
         game.startLevel();
 
-        game.movePlayer("Adam", Direction.EAST);
-        game.movePlayer("Adam", Direction.SOUTH);
+        game.placeBomb("Eric");
+        game.placeBomb("Eric");
+        game.placeBomb("Bri");
         while(game.isRunning()){
             GameEvent e = game.pollEventPump();
 //            if (e != null) System.out.println(e.getEventType().toString());

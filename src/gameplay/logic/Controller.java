@@ -42,7 +42,7 @@ public class Controller implements Runnable{
         System.out.println("level started");
         Timer timer = new Timer();
         timer.scheduleAtFixedRate(new HandleMonsters(this),0,1000);
-        timer.scheduleAtFixedRate(new HandleEventSink(this),0,1000);
+        timer.scheduleAtFixedRate(new HandleEventSink(this),500,1000);
 
         while(!gameFlag.terminated){}
         timer.cancel();
@@ -54,7 +54,9 @@ public class Controller implements Runnable{
         System.out.println("handling monsters");
 
         for (Monster monster : level.monsters) {
-            moveMonster(monster);
+            synchronized (level){
+                moveMonster(monster);
+            }
         }
         level.grid.printGrid();
 
@@ -106,17 +108,19 @@ public class Controller implements Runnable{
         System.out.println("handling event sink");
         GameEvent next = eventSink.poll();
         if(next != null){
-            switch (next.getEventType()){
-                case MOVE_PLAYER:
-                    MovePlayerEvent e1 = (MovePlayerEvent)next;
-                    movePlayer(e1.getPlayerName(),e1.getDirection());
-                    break;
-                case PLACE_BOMB:
-                    PlaceBombEvent e2 = (PlaceBombEvent) next;
-                    placeBomb(e2.getPlayerName());
-                    break;
-                default:
-                    LoggerMan.log(java.util.logging.Level.WARNING, "Unable to handle event from event sink.");
+            synchronized (level){
+                switch (next.getEventType()){
+                    case MOVE_PLAYER:
+                        MovePlayerEvent e1 = (MovePlayerEvent)next;
+                        movePlayer(e1.getPlayerName(),e1.getDirection());
+                        break;
+                    case PLACE_BOMB:
+                        PlaceBombEvent e2 = (PlaceBombEvent) next;
+                        placeBomb(e2.getPlayerName());
+                        break;
+                    default:
+                        LoggerMan.log(java.util.logging.Level.WARNING, "Unable to handle event from event sink.");
+                }
             }
         }
     }
@@ -125,8 +129,9 @@ public class Controller implements Runnable{
         Player player = findPlayer(playerName);
 
         if(player == null){
-            LoggerMan.log(java.util.logging.Level.SEVERE,"No such player in this game.");
-            throw new NullPointerException("No such player in this game.");
+            String noSuchPlayer = "No such player in this level.";
+            LoggerMan.log(java.util.logging.Level.SEVERE,"movePlayer: " + noSuchPlayer);
+            throw new NullPointerException(noSuchPlayer);
         }
         else{
             GridElement neighbor = level.grid.getNeighbor(player.getPosition(),direction);
@@ -145,15 +150,38 @@ public class Controller implements Runnable{
 
     private void placeBomb(String playerName){
         Player player = findPlayer(playerName);
+
         if(player == null){
-            LoggerMan.log(java.util.logging.Level.SEVERE,"No such player in this game.");
-            throw new NullPointerException("No such player in this game.");
+            String noSuchPlayer = "No such player in this level.";
+            LoggerMan.log(java.util.logging.Level.SEVERE,"placeBomb: " + noSuchPlayer);
+            throw new NullPointerException(noSuchPlayer);
         }
         else{
-            // TODO
-
-
-
+            Direction stepAway = null;
+            GridElement neighbor = level.grid.getNeighbor(player.getPosition(),player.getDirection());
+            if(neighbor != null && neighbor.getType() == ElementType.EMPTY){
+                stepAway = player.getDirection(); // if possible, place bomb and step away in the player's original direction
+            }
+            else{
+                for(Direction direction : Grid.directions){ // if not, find a direction to step away to
+                    neighbor = level.grid.getNeighbor(player.getPosition(),direction);
+                    if(neighbor != null && neighbor.getType() == ElementType.EMPTY){
+                        stepAway = player.getDirection();
+                    }
+                }
+            }
+            if(stepAway == null){
+                LoggerMan.log(java.util.logging.Level.SEVERE,"placeBomb: Player is stuck, cannot place bomb.");
+            }
+            else{
+                Bomb bomb = new Bomb(player.getPosition());
+                level.bombs.add(bomb);
+                level.grid.swapElements(player,neighbor);
+                player.setDirection(stepAway);
+                level.grid.setElement(neighbor.getPosition(),bomb);
+                eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition()));
+                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition()));
+            }
         }
     }
 

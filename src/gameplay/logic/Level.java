@@ -18,6 +18,9 @@ public class Level {
     protected Level(int levelNo, Grid g){
         levelNumber = levelNo;
         grid = g;
+        players = new ArrayList<>();
+        monsters = new ArrayList<>();
+        bombs = new ArrayList<>();
     }
 
 

@@ -36,7 +36,6 @@ public class LevelFactory {
             List.of(new Position(1,1), new Position(1,gridWidth), new Position(gridLength, 1), new Position(gridLength, gridWidth))
         );
 
-        level.players = new ArrayList<>();
         int i=0;
         for (String name : playerNames){
             level.players.add(new Player(name,corners.get(i), Direction.EAST));
@@ -55,8 +54,6 @@ public class LevelFactory {
         Random randomGenerator = new Random();
         boolean placedOne;
         boolean tooClose;
-
-        level.monsters = new ArrayList<>();
 
         for(int monsterCount=0; monsterCount < level.levelNumber*2; monsterCount++){ // 2*N monsters on level N
             placedOne = false;
