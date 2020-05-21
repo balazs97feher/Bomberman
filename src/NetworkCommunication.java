@@ -6,6 +6,8 @@ public class NetworkCommunication {
 
     private String ip = "localhost";
     private int port = 22222;
+    private int buffer = 0;
+    private int tx = 0;
 
     private Scanner scanner = new Scanner(System.in);
 
@@ -28,10 +30,15 @@ public class NetworkCommunication {
         ip = scanner.nextLine();
         System.out.println("Please input the port: ");
         port = scanner.nextInt();
+
+
+
         while (port < 1 || port > 65535) {
             System.out.println("The port you entered was invalid, please input another port: ");
             port = scanner.nextInt();
         }
+
+
 
         if (!connect()) initializeServer();
 
@@ -40,13 +47,47 @@ public class NetworkCommunication {
     public void run(){
         while (true) {
 
+            System.out.println("1 For SEND, 0 for RECEIVE ");
+            tx = scanner.nextInt();
+
             if (!accepted) listenForServerRequest();
+
+            if (tx == 1){
+                System.out.println("Write the message: ");
+                buffer = scanner.nextInt();
+
+                try {
+                    dos.writeInt(buffer);
+                    dos.flush();
+                    buffer = 0;
+                } catch (IOException e1) {
+                    errors++;
+                    e1.printStackTrace();
+                }
+                System.out.println("DATA WAS SENT");
+                tx = 0;
+            }
+
+            else{
+                System.out.println("Received data:");
+
+                try{
+                    buffer = dis.readInt();
+                    System.out.println(buffer);
+                    buffer = 0;
+
+                }catch(IOException e2){
+                    errors++;
+                    e2.printStackTrace();
+                }
+
+            }
+
+
+
 
 
         }
-
-
-
     }
 
     private boolean connect() {
@@ -86,6 +127,9 @@ public class NetworkCommunication {
             e.printStackTrace();
         }
     }
+
+
+
 
 
 
