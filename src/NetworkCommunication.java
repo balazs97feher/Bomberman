@@ -1,69 +1,92 @@
 import java.io.*;
 import java.net.*;
+import java.util.Scanner;
 
 public class NetworkCommunication {
-    int ServerPort = 666;
-    String ServerIP = "localhost";
+
+    private String ip = "localhost";
+    private int port = 22222;
+
+    private Scanner scanner = new Scanner(System.in);
+
+    private DataOutputStream dos;
+    private DataInputStream dis;
+
+    private Socket socket;
+    private ServerSocket serverSocket;
+
+    private boolean accepted = false;
+    private int errors = 0;
 
 
-    NetworkCommunication(){
-        System.out.println( "Network Communication");
-    }
-
-    void ClientMode(){
-
-        System.out.println( "Client Mode");
-
-        try (Socket ClientSocket = new Socket(ServerIP, ServerPort)) {
-
-                    InputStream input = ClientSocket.getInputStream();
-                    InputStreamReader reader = new InputStreamReader(input);
-
-                    int character;
-                    StringBuilder data = new StringBuilder();
-
-                    while ((character = reader.read()) != -1) {
-                        data.append((char) character);
-                    }
-
-                    System.out.println(data);
 
 
-                } catch (UnknownHostException ex) {
+    NetworkCommunication() {
+        System.out.println("Network Communication");
 
-                    System.out.println("Server not found: " + ex.getMessage());
+        System.out.println("Please input the IP: ");
+        ip = scanner.nextLine();
+        System.out.println("Please input the port: ");
+        port = scanner.nextInt();
+        while (port < 1 || port > 65535) {
+            System.out.println("The port you entered was invalid, please input another port: ");
+            port = scanner.nextInt();
+        }
 
-                } catch (IOException ex) {
-
-                    System.out.println("I/O error: " + ex.getMessage());
-                }
-
-
+        if (!connect()) initializeServer();
 
     }
-    void ServerMode(){
-        System.out.println( "Server Mode");
+
+    public void run(){
+        while (true) {
+
+            if (!accepted) listenForServerRequest();
 
 
-        try (ServerSocket serverSocket = new ServerSocket(ServerPort)) {
-
-            System.out.println("Server is listening on port " + ServerPort);
-
-            while (true) {
-                Socket socket = serverSocket.accept();
-                System.out.println("New client connected");
-
-                new ServerThread(socket).start();
-            }
-
-        } catch (IOException ex) {
-            System.out.println("Server exception: " + ex.getMessage());
-            ex.printStackTrace();
         }
 
 
 
     }
+
+    private boolean connect() {
+        try {
+            socket = new Socket(ip, port);
+            dos = new DataOutputStream(socket.getOutputStream());
+            dis = new DataInputStream(socket.getInputStream());
+            accepted = true;
+        } catch (IOException e) {
+            System.out.println("Unable to connect to the address: " + ip + ":" + port + " | Starting a server");
+            return false;
+        }
+        System.out.println("Successfully connected to the server.");
+        return true;
+    }
+
+    private void initializeServer() {
+        try {
+            serverSocket = new ServerSocket(port, 8, InetAddress.getByName(ip));
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        //yourTurn = true;
+        //circle = false;
+    }
+
+    private void listenForServerRequest() {
+        System.out.println("Waiting for client...");
+        Socket socket = null;
+        try {
+            socket = serverSocket.accept();
+            dos = new DataOutputStream(socket.getOutputStream());
+            dis = new DataInputStream(socket.getInputStream());
+            accepted = true;
+            System.out.println("CLIENT HAS REQUESTED TO JOIN, AND WE HAVE ACCEPTED");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 
 
 }
