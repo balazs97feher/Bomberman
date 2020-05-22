@@ -4,11 +4,6 @@ import java.util.Scanner;
 
 public class NetworkCommunication {
 
-    private String ip = "localhost";
-    private int port = 22222;
-    private int buffer = 0;
-    private int tx = 0;
-
     private Scanner scanner = new Scanner(System.in);
 
     private DataOutputStream dos;
@@ -21,76 +16,44 @@ public class NetworkCommunication {
     private int errors = 0;
 
 
-
-
     NetworkCommunication() {
-        System.out.println("Network Communication");
-
-        System.out.println("Please input the IP: ");
-        ip = scanner.nextLine();
-        System.out.println("Please input the port: ");
-        port = scanner.nextInt();
-
-
-
-        while (port < 1 || port > 65535) {
-            System.out.println("The port you entered was invalid, please input another port: ");
-            port = scanner.nextInt();
-        }
-
-
-
-        if (!connect()) initializeServer();
-
+        System.out.println("CONSTRUCTOR: Network Communication ");
     }
 
-    public void run(){
-        while (true) {
+    public void servermode(String ip, int port){
+        initializeServer(ip, port);
+        if (!accepted) listenForServerRequest();
+    }
 
-            System.out.println("1 For SEND, 0 for RECEIVE ");
-            tx = scanner.nextInt();
+    public void clientmode(String ip, int port){
+        connect(ip, port);
+    }
 
-            if (!accepted) listenForServerRequest();
-
-            if (tx == 1){
-                System.out.println("Write the message: ");
-                buffer = scanner.nextInt();
-
-                try {
-                    dos.writeInt(buffer);
-                    dos.flush();
-                    buffer = 0;
-                } catch (IOException e1) {
-                    errors++;
-                    e1.printStackTrace();
-                }
-                System.out.println("DATA WAS SENT");
-                tx = 0;
-            }
-
-            else{
-                System.out.println("Received data:");
-
-                try{
-                    buffer = dis.readInt();
-                    System.out.println(buffer);
-                    buffer = 0;
-
-                }catch(IOException e2){
-                    errors++;
-                    e2.printStackTrace();
-                }
-
-            }
-
-
-
-
-
+    public void send(int message){
+        try {
+            dos.writeInt(message);
+            dos.flush();
+            message = 0;
+            return;
+        } catch (IOException e1) {
+            errors++;
+            e1.printStackTrace();
         }
     }
 
-    private boolean connect() {
+    public int receive(){
+        try{
+            return dis.readInt();
+
+        }catch(IOException e2){
+            errors++;
+            e2.printStackTrace();
+            return -666;
+        }
+    }
+
+
+    private boolean connect(String ip, int port) {
         try {
             socket = new Socket(ip, port);
             dos = new DataOutputStream(socket.getOutputStream());
@@ -104,14 +67,12 @@ public class NetworkCommunication {
         return true;
     }
 
-    private void initializeServer() {
+    private void initializeServer(String ip, int port) {
         try {
             serverSocket = new ServerSocket(port, 8, InetAddress.getByName(ip));
         } catch (Exception e) {
             e.printStackTrace();
         }
-        //yourTurn = true;
-        //circle = false;
     }
 
     private void listenForServerRequest() {
@@ -127,10 +88,6 @@ public class NetworkCommunication {
             e.printStackTrace();
         }
     }
-
-
-
-
 
 
 }
