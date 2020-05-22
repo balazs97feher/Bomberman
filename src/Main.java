@@ -1,21 +1,18 @@
 import java.util.Scanner;
 
-
-
-
 public class Main {
 
-
-    private static Scanner scanner = new Scanner(System.in);
-
-    private static int serverclient = 0;
-    private static int tx = 0;
-    private static int buffer = 0;
-
-    private static String ip = "localhost";
-    private static int port = 22222;
-
     public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        int serverclient = 0;
+        int tx = 0;
+        int buffer = 0;
+
+        String ip = "localhost";
+        int port = 22222;
+
 
         System.out.println("Please input the IP: ");
         ip = scanner.nextLine();
