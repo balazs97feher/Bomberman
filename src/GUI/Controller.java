@@ -1,4 +1,4 @@
-package Bomberman;
+package GUI;
 
 import java.io.IOException;
 import java.net.URL;

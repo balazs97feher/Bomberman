@@ -8,7 +8,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="newonlinegame_pane" fx:id="newonlinegame_pane" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bomberman.Controller">
+<AnchorPane id="newonlinegame_pane" fx:id="newonlinegame_pane" prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
       <VBox alignment="CENTER" layoutX="471.0" layoutY="131.0" prefHeight="307.0" prefWidth="288.0" spacing="40.0">
          <children>

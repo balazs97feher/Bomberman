@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Bomberman.Controller">
+<AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
       <Button id="backtomain4" fx:id="backtomain4" layoutX="619.0" layoutY="539.0" mnemonicParsing="false" onAction="#backtomain_action" text="Back to main maneu">
          <font>
