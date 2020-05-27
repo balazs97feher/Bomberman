@@ -31,7 +31,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button contentDisplay="CENTER" mnemonicParsing="false" text="Start the game">
+            <Button id="button_startolllinegame" fx:id="button_startolllinegame" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startoffline_action" text="Start the game">
                <font>
                   <Font name="Papyrus" size="18.0" />
                </font>

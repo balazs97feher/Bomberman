@@ -12,6 +12,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -30,14 +31,50 @@ public class Controller implements Initializable {
     private Label label_IPAdress;
 
     @FXML
+    private TextField serverNicknameIn;
+
+    @FXML
+    private Label serverNicknameOut;
+
+    @FXML
     private void connected_action(ActionEvent event){
         label_waitingconnection.setText("Connected");
         button_startonlinegame.setVisible(true);
     }
 
     @FXML
-    private void startonline_action(ActionEvent event){
+    private void connecttogame_action(ActionEvent event) throws IOException{
+        System.out.println("Connecting to the online game...");
+        Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("onlineGame.fxml"));
+        Scene newOnlineGameScene = new Scene(newOnlineGameParent);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newOnlineGameScene);
+        window.show();
+    }
+
+    @FXML
+    private void startoffline_action(ActionEvent event) throws IOException{
+        System.out.println("Starting the offline game...");
+        Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("offlineGame.fxml"));
+        Scene newOnlineGameScene = new Scene(newOnlineGameParent);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newOnlineGameScene);
+        window.show();
+    }
+
+    @FXML
+    private void startonline_action(ActionEvent event) throws IOException{
         System.out.println("Starting the online game...");
+        Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("onlineGame.fxml"));
+        Scene newOnlineGameScene = new Scene(newOnlineGameParent);
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        window.setScene(newOnlineGameScene);
+        serverNicknameIn.setText(String.valueOf(serverNicknameIn.getCharacters()));
+        window.show();
+
     }
 
     @FXML
@@ -49,6 +86,7 @@ public class Controller implements Initializable {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newOnlineGameScene);
+
         window.show();
     }
 

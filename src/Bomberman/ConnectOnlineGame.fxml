@@ -45,7 +45,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button mnemonicParsing="false" text="Connect">
+            <Button id="button_connecttogame" fx:id="button_connecttogame" mnemonicParsing="false" onAction="#connecttogame_action" text="Connect">
                <font>
                   <Font name="Papyrus" size="18.0" />
                </font>

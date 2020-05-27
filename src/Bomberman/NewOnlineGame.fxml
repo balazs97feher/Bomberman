@@ -19,7 +19,7 @@
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="37.0" prefWidth="149.0">
+                  <TextField id="serverNicknameIn" fx:id="serverNicknameIn" prefHeight="37.0" prefWidth="149.0">
                      <font>
                         <Font name="Papyrus" size="14.0" />
                      </font>
