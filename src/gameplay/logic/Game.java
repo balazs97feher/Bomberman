@@ -92,7 +92,13 @@ public class Game {
     }
 
 
+    public int getGridLength(){
+        return gridLength;
+    }
 
+    public int getGridWidth(){
+        return gridWidth;
+    }
 
     /**
      * function to request to move a player on the grid
