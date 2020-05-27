@@ -14,18 +14,23 @@ public class Main {
         int port = 22222;
 
 
+        //ip es port bekerese
         System.out.println("Please input the IP: ");
         ip = scanner.nextLine();
         System.out.println("Please input the port: ");
         port = scanner.nextInt();
 
+        //port ellenorzese
         while (port < 1024 || port > 65535) {
             System.out.println("The port you entered was invalid, please input another port: ");
             port = scanner.nextInt();
         }
 
+
         NetworkCommunication NC = new NetworkCommunication();
 
+
+        //server es client mod kivalasztas
         System.out.println("1 - SERVER, 0 - CLIENT ");
         serverclient = scanner.nextInt();
 
@@ -41,6 +46,11 @@ public class Main {
             System.out.println("CLIENT mode activated: " + ip + ":" + port + " | Starting a server");
 
         }
+
+        //ki kell valasztani h kuldeni vagy fogadni akarunk
+        //
+        //mindegy h mikor valasztjuk ki a fogadast
+        //az uzenet elkuldese elott es utan is kivalaszthatojuk a masik gepen fogadast
 
         while(true) {
             System.out.println("1 For SEND, 0 for RECEIVE ");

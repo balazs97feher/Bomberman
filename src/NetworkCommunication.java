@@ -15,20 +15,27 @@ public class NetworkCommunication {
     private boolean accepted = false;
     private int errors = 0;
 
-
+    //konstruktor
+    //csak h latszodjon h lefut
     NetworkCommunication() {
         System.out.println("CONSTRUCTOR: Network Communication ");
     }
 
+    //server mode valasztasa
     public void servermode(String ip, int port){
         initializeServer(ip, port);
         if (!accepted) listenForServerRequest();
     }
 
+    //client mod valasztasa
+    //meg kell adni h mi a server ip es port
     public void clientmode(String ip, int port){
         connect(ip, port);
     }
 
+
+    //uzenet kuldese
+    //jelenleg egy int-et tud kuldeni parameterkent
     public void send(int message){
         try {
             dos.writeInt(message);
@@ -41,6 +48,8 @@ public class NetworkCommunication {
         }
     }
 
+    //uzenet fogadasa
+    //fogadott int-et ad vissza
     public int receive(){
         try{
             return dis.readInt();
@@ -53,6 +62,8 @@ public class NetworkCommunication {
     }
 
 
+    //serverhez csatlakozas
+    //visszaadja h sikeres e vagy nem
     private boolean connect(String ip, int port) {
         try {
             socket = new Socket(ip, port);
@@ -67,6 +78,8 @@ public class NetworkCommunication {
         return true;
     }
 
+    //server inicializalasa
+    //ip es portot kell megadni
     private void initializeServer(String ip, int port) {
         try {
             serverSocket = new ServerSocket(port, 8, InetAddress.getByName(ip));
@@ -75,6 +88,7 @@ public class NetworkCommunication {
         }
     }
 
+    //cliens fogadasa a szerveren
     private void listenForServerRequest() {
         System.out.println("Waiting for client...");
         Socket socket = null;
