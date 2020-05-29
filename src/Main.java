@@ -8,7 +8,7 @@ public class Main {
 
         int serverclient = 0;
         int tx = 0;
-        int buffer = 0;
+        String buffer = "";
 
         String ip = "localhost";
         int port = 22222;
@@ -58,7 +58,10 @@ public class Main {
 
             if (tx == 1) {
                 System.out.println("Write the message: ");
-                buffer = scanner.nextInt();
+                //buffer = scanner.nextLine();
+                buffer = System.console().readLine();
+                System.out.println(buffer);
+
 
                 NC.send(buffer);
 
@@ -68,5 +71,8 @@ public class Main {
                 System.out.println(NC.receive());
             }
         }
+
+        //socket lezarasa
+        //NC.socketclose();
     }
 }

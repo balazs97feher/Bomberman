@@ -12,6 +12,9 @@ public class NetworkCommunication {
     private Socket socket;
     private ServerSocket serverSocket;
 
+    //0 client, 1 server
+    private int SocketMode = 0;
+
     private boolean accepted = false;
     private int errors = 0;
 
@@ -35,12 +38,12 @@ public class NetworkCommunication {
 
 
     //uzenet kuldese
-    //jelenleg egy int-et tud kuldeni parameterkent
-    public void send(int message){
+    //string uzenet kuldese parameterkent
+    public void send(String message){
         try {
-            dos.writeInt(message);
+            dos.writeUTF(message);
             dos.flush();
-            message = 0;
+            message = "";
             return;
         } catch (IOException e1) {
             errors++;
@@ -49,16 +52,35 @@ public class NetworkCommunication {
     }
 
     //uzenet fogadasa
-    //fogadott int-et ad vissza
-    public int receive(){
+    //fogadott string-et ad vissza
+    public String receive(){
         try{
-            return dis.readInt();
+            return dis.readUTF();
 
         }catch(IOException e2){
             errors++;
             e2.printStackTrace();
-            return -666;
+            return "ERROR";
         }
+    }
+
+    //kapcsolat lezarasa
+    //socket close
+    public void socketclose(){
+        if (SocketMode == 1) {
+            try {
+                serverSocket.close();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        else if(SocketMode == 0)
+            try {
+                socket.close();
+            }
+            catch (Exception e) {
+                e.printStackTrace();
+            }
     }
 
 
@@ -70,6 +92,7 @@ public class NetworkCommunication {
             dos = new DataOutputStream(socket.getOutputStream());
             dis = new DataInputStream(socket.getInputStream());
             accepted = true;
+            SocketMode = 0;
         } catch (IOException e) {
             System.out.println("Unable to connect to the address: " + ip + ":" + port + " | Starting a server");
             return false;
@@ -78,11 +101,13 @@ public class NetworkCommunication {
         return true;
     }
 
+
     //server inicializalasa
     //ip es portot kell megadni
     private void initializeServer(String ip, int port) {
         try {
             serverSocket = new ServerSocket(port, 8, InetAddress.getByName(ip));
+            SocketMode = 1;
         } catch (Exception e) {
             e.printStackTrace();
         }
