@@ -1,9 +1,38 @@
 import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public class Main {
 
     public static void main(String[] args) {
 
+
+        // Ranking List demo
+        //
+        //
+        //
+        RankingListManager rlm = new RankingListManager();
+
+        rlm.addToRankingList("Valter", 100);
+        rlm.addToRankingList("Jani", 50);
+        rlm.addToRankingList("Lali", 40);
+        rlm.addToRankingList("Józsi", 60);
+        rlm.addToRankingList("Sanyi", 20);
+
+
+        rlm.printRankingList(rlm.getRankingList());
+        rlm.serialiseRankingList();
+
+        rlm.deserialiseRankingList("map.txt");
+        rlm.printRankingList(rlm.getRankingList());
+        //********************************************************************
+        //
+        //
+        //
+
+        // Network Demo
+        //
+        //
         Scanner scanner = new Scanner(System.in);
 
         int serverclient = 0;
@@ -74,5 +103,10 @@ public class Main {
 
         //socket lezarasa
         //NC.socketclose();
+
+        //*****************************************************************************
+
+
+
     }
 }
