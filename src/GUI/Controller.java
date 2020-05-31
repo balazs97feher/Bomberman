@@ -1,7 +1,5 @@
 package GUI;
 
-import java.awt.*;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
@@ -21,6 +19,8 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -96,6 +96,8 @@ public class Controller implements Initializable {
 
         GridPane root = new GridPane();
         root.setGridLinesVisible(true);
+        root.setPrefHeight(numRows * 50);
+        root.setPrefWidth(numCols * 50);
 
         for (int i = 0; i < numCols; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
@@ -108,24 +110,31 @@ public class Controller implements Initializable {
             root.getRowConstraints().add(rowConst);
         }
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, 800, 600));
+        window.setScene(new Scene(root, numCols * 50, numRows * 50));
         window.show();
+
+        Image wall1img = new Image("File:pictures/Wall1.png");
+        Image wall2img = new Image("File:pictures/Wall2.png");
+        Image bombimg = new Image("File:pictures/Bomb.png");
+        Image monsterimg = new Image("File:pictures/Monster.png");
+        Image player1img = new Image("File:pictures/Player1.png");
+        Image player2img = new Image("File:pictures/Player2.png");
 
         for (int x = 0; x < numRows; x++){
             for (int y = 0; y < numCols; y++){
                 GridElement element = grid.get(x).get(y);
                 switch (element.getType()){
                     case BOMB:
-                        root.add(new Label("Bomb"), y, x);
+                        root.add(new ImageView(bombimg), y, x);
                         break;
                     case WALL:
-                        root.add(new Label("Wall"), y, x);
+                        root.add(new ImageView(wall1img), y, x);
                         break;
                     case PLAYER:
-                        root.add(new Label("Player"), y, x);
+                        root.add(new ImageView(player1img), y, x);
                         break;
                     case MONSTER:
-                        root.add(new Label("Monster"), y, x);
+                        root.add(new ImageView(monsterimg), y, x);
                         break;
 
                 }

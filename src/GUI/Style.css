@@ -1,5 +1,5 @@
 .background {
--fx-background-image:url('background.png');
+-fx-background-image:url("File:pictures/background.png");
 -fx-background-size: contain;
 }
 
