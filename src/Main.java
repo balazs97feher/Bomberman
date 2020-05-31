@@ -1,3 +1,5 @@
+import gameplay.LoggerMan;
+import gameplay.logic.Game;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -9,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("GUI/mainmenu.fxml"));
-        primaryStage.setTitle("GUI");
+        primaryStage.setTitle("Bomberman");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.setResizable(false);
         primaryStage.show();
@@ -18,5 +20,7 @@ public class Main extends Application {
 
     public static void main(String[] args) {
         launch(args);
+
+
     }
 }

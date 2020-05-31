@@ -14,7 +14,7 @@
          <children>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="15.0">
                <children>
-                  <Label text="Player1:" id="serverNicknameOut" fx:id="serverNicknameOut">
+                  <Label id="serverNicknameOut" fx:id="serverNicknameOut" text="Player1:">
                      <font>
                         <Font name="Papyrus" size="18.0" />
                      </font>
@@ -58,7 +58,7 @@
       </HBox>
    </top>
    <center>
-      <GridPane alignment="CENTER" BorderPane.alignment="CENTER">
+      <GridPane id="gridpaneid" fx:id="gridpaneid" alignment="CENTER" BorderPane.alignment="CENTER">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />

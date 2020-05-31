@@ -1,8 +1,16 @@
 package GUI;
 
+import java.awt.*;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.ResourceBundle;
+
+import gameplay.LoggerMan;
+import gameplay.grid.GridElement;
+import gameplay.logic.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -14,6 +22,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.ColumnConstraints;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.RowConstraints;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
@@ -37,6 +48,24 @@ public class Controller implements Initializable {
     private Label serverNicknameOut;
 
     @FXML
+    private GridPane gridpaneid;
+
+    @FXML
+    private void set_grid_resolution(int width, int height){
+        gridpaneid.setGridLinesVisible(true);
+        for (int i = 0; i < width; i++){
+            ColumnConstraints colConst = new ColumnConstraints();
+            //colConst.setPercentWidth(100.0 / width);
+            gridpaneid.getColumnConstraints().add(colConst);
+        }
+        for (int i = 0; i < height; i++){
+            RowConstraints rowConst = new RowConstraints();
+            //rowConst.setPercentHeight(100.0 / height);
+            gridpaneid.getRowConstraints().add(rowConst);
+        }
+    }
+
+    @FXML
     private void connected_action(ActionEvent event){
         label_waitingconnection.setText("Connected");
         button_startonlinegame.setVisible(true);
@@ -56,12 +85,54 @@ public class Controller implements Initializable {
     @FXML
     private void startoffline_action(ActionEvent event) throws IOException{
         System.out.println("Starting the offline game...");
-        Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("offlineGame.fxml"));
-        Scene newOnlineGameScene = new Scene(newOnlineGameParent);
 
+        LoggerMan.initialize();
+        Game game = new Game();
+        game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
+        ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
+
+        int numCols = game.getGridWidth() + 2;
+        int numRows = game.getGridLength() + 2;
+
+        GridPane root = new GridPane();
+        root.setGridLinesVisible(true);
+
+        for (int i = 0; i < numCols; i++) {
+            ColumnConstraints colConst = new ColumnConstraints();
+            colConst.setPercentWidth(100.0 / numCols);
+            root.getColumnConstraints().add(colConst);
+        }
+        for (int i = 0; i < numRows; i++) {
+            RowConstraints rowConst = new RowConstraints();
+            rowConst.setPercentHeight(100.0 / numRows);
+            root.getRowConstraints().add(rowConst);
+        }
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newOnlineGameScene);
+        window.setScene(new Scene(root, 800, 600));
         window.show();
+
+        for (int x = 0; x < numRows; x++){
+            for (int y = 0; y < numCols; y++){
+                GridElement element = grid.get(x).get(y);
+                switch (element.getType()){
+                    case BOMB:
+                        root.add(new Label("Bomb"), y, x);
+                        break;
+                    case WALL:
+                        root.add(new Label("Wall"), y, x);
+                        break;
+                    case PLAYER:
+                        root.add(new Label("Player"), y, x);
+                        break;
+                    case MONSTER:
+                        root.add(new Label("Monster"), y, x);
+                        break;
+
+                }
+            }
+        }
+
+
     }
 
     @FXML
@@ -72,6 +143,8 @@ public class Controller implements Initializable {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newOnlineGameScene);
+        gridpaneid.setGridLinesVisible(true);
+        //set_grid_resolution(200, 150);
         serverNicknameIn.setText(String.valueOf(serverNicknameIn.getCharacters()));
         window.show();
 
