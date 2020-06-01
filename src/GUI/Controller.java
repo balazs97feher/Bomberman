@@ -116,45 +116,14 @@ public class Controller implements Initializable {
         window.show();
 
         GUI_Grid gui_grid = new GUI_Grid(height, width, grid);
+        //gui_grid.changePosition(new Position(1,1),new Position(1,2));
+        gui_grid.swapPosition(new Position(5,1),new Position(4,2));
+        gui_grid.addbomb(new Position(1,5),6);
+        gui_grid.addbomb(new Position(1,2),55);
+        gui_grid.removebomb(55);
         gui_grid.printGUI_Grid(gridPane);
         //gui_grid.printGUI_Grid();
 
-    }
-
-    private void grid_visualization(ArrayList<ArrayList<GridElement>> grid, GridPane gridPane, int numRows, int numCols){
-        Image wall1img = new Image("File:pictures/Wall1.png");
-        Image wall2img = new Image("File:pictures/Wall2.png");
-        Image bombimg = new Image("File:pictures/Bomb.png");
-        Image monsterimg = new Image("File:pictures/Monster.png");
-        Image player1img = new Image("File:pictures/Player1.png");
-        Image player2img = new Image("File:pictures/Player2.png");
-
-        for (int x = 0; x < numRows; x++){
-            for (int y = 0; y < numCols; y++){
-                GridElement element = grid.get(x).get(y);
-                switch (element.getType()){
-                    case BOMB:
-                        gridPane.add(new ImageView(bombimg), y, x);
-                        break;
-                    case WALL:
-                        gridPane.add(new ImageView(wall1img), y, x);
-                        break;
-                    case PLAYER:
-                        Player player = (Player) element;
-                        if(player.getId() == 0){
-                            gridPane.add(new ImageView(player1img), y, x);
-                        }
-                        else{
-                            gridPane.add(new ImageView(player2img), y, x);
-                        }
-                        break;
-                    case MONSTER:
-                        gridPane.add(new ImageView(monsterimg), y, x);
-                        break;
-
-                }
-            }
-        }
     }
 
     @FXML

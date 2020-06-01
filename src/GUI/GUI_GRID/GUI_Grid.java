@@ -110,16 +110,40 @@ public class GUI_Grid {
         }
     }
 
-
-    public void printGUI_Grid(){
+    public void changePosition(Position oldPos, Position newPos){
         for(int i = 0; i < elements.size(); i++){
             GUI_GridElement element = elements.get(i);
-            System.out.println(element.getType());
-            System.out.println(element.getPosition());
+            if(element.getPosition().getPosX() == oldPos.getPosX()){
+                if(element.getPosition().getPosY() == oldPos.getPosY()){
+                    //System.out.println("Item found");
+                    element.setPosition(newPos);
+                }
+            }
+
         }
     }
 
-    public int getsize(){
-        return elements.size();
+    public void swapPosition(Position pos1, Position pos2){
+        Position temp = new Position(height, width);
+        changePosition(pos1,temp);
+        changePosition(pos2,pos1);
+        changePosition(temp,pos2);
     }
+
+    public void addbomb(Position pos, int id){
+        elements.add(new GUI_Bomb(pos,id));
+    }
+
+    public void removebomb(int id){
+        for(int i = 0; i < elements.size(); i++){
+            GUI_GridElement element = elements.get(i);
+            if(element.getType() == ElementType.BOMB){
+                GUI_Bomb bomb = (GUI_Bomb) element;
+                if(bomb.getId() == id){
+                    elements.remove(i);
+                }
+            }
+        }
+    }
+
 }

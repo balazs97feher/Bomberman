@@ -11,6 +11,8 @@ public class GUI_Bomb extends GUI_GridElement {
         id = Id;
     }
 
+    public int getId() { return id; }
+
     @Override
     public ElementType getType() {
         return ElementType.BOMB;
