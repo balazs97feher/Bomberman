@@ -18,6 +18,8 @@ public class GUI_WALL extends GUI_GridElement {
 
     public boolean getDestructible(){return isDestructible;}
 
+    public int getId() { return id; }
+
     @Override
     public ElementType getType() {
         return ElementType.WALL;

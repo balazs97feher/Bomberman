@@ -18,17 +18,6 @@ public class GUI_Grid {
         width = w;
         elements = new ArrayList<GUI_GridElement>();
 
-
-        //Position pos1 = new Position(1,1);
-        //GUI_Player player = new GUI_Player(pos1, Direction.NORTH, 0);
-        //Position pos2 = new Position(2, 2);
-        //GUI_WALL wall = new GUI_WALL(pos2, false, 1);
-        //elements.add(new GUI_Player(pos1, Direction.NORTH, 1));
-        //elements.add(new GUI_WALL(pos2, false, 2));
-
-
-
-
         for(int x = 0; x < width; x++){
             for(int y = 0; y < height; ++y){
                 GridElement element = grid.get(y).get(x);
@@ -57,11 +46,6 @@ public class GUI_Grid {
                         //System.out.println("Empty");
                         elements.add(new GUI_EmptyElement(element.getPosition()));
                 }
-                //System.out.println("Size of list:");
-                //System.out.println(elements.size());
-                //for(int i = 0; i < elements.size(); ++i){
-                //    System.out.println(elements.get(i).getType());
-                //}
             }
         }
 
@@ -115,7 +99,6 @@ public class GUI_Grid {
             GUI_GridElement element = elements.get(i);
             if(element.getPosition().getPosX() == oldPos.getPosX()){
                 if(element.getPosition().getPosY() == oldPos.getPosY()){
-                    //System.out.println("Item found");
                     element.setPosition(newPos);
                 }
             }
@@ -146,4 +129,97 @@ public class GUI_Grid {
         }
     }
 
+    public void removemonster(int id){
+        for(int i = 0; i < elements.size(); i++){
+            GUI_GridElement element = elements.get(i);
+            if(element.getType() == ElementType.MONSTER){
+                GUI_Monster monster = (GUI_Monster) element;
+                if(monster.getId() == id){
+                    elements.remove(i);
+                }
+            }
+        }
+    }
+
+    public  void removeplayer(int id){
+        for(int i = 0; i < elements.size(); i++){
+            GUI_GridElement element = elements.get(i);
+            if(element.getType() == ElementType.PLAYER){
+                GUI_Player player = (GUI_Player) element;
+                if(player.getId() == id){
+                    elements.remove(i);
+                }
+            }
+        }
+    }
+
+    public  void removewall(int id){
+        for(int i = 0; i < elements.size(); i++){
+            GUI_GridElement element = elements.get(i);
+            if(element.getType() == ElementType.WALL){
+                GUI_WALL wall = (GUI_WALL) element;
+                if(wall.getId() == id){
+                    elements.remove(i);
+                }
+            }
+        }
+    }
+
+    public void moveplayer(int playerid, Direction direction){
+        for(int i = 0; i < elements.size(); i++){
+            GUI_GridElement element = elements.get(i);
+            if(element.getType() == ElementType.PLAYER){
+                GUI_Player player = (GUI_Player) element;
+                if(player.getId() == playerid){
+                    Position oldpos = player.getPosition();
+                    Position newpos = new Position(height,width);
+                    switch (direction){
+                        case EAST:
+                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()+1);
+                            break;
+                        case WEST:
+                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()-1);
+                            break;
+                        case NORTH:
+                            newpos = new Position(oldpos.getPosY()+1, oldpos.getPosX());
+                            break;
+                        case SOUTH:
+                            newpos = new Position(oldpos.getPosY()-1, oldpos.getPosX());
+                            break;
+                    }
+                    swapPosition(oldpos,newpos);
+                    player.setDirection(direction);
+                }
+            }
+        }
+    }
+
+    public void movemonster(int monsterid, Direction direction){
+        for(int i = 0; i < elements.size(); i++){
+            GUI_GridElement element = elements.get(i);
+            if(element.getType() == ElementType.MONSTER){
+                GUI_Monster monster = (GUI_Monster) element;
+                if(monster.getId() == monsterid){
+                    Position oldpos = monster.getPosition();
+                    Position newpos = new Position(height,width);
+                    switch (direction){
+                        case EAST:
+                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()+1);
+                            break;
+                        case WEST:
+                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()-1);
+                            break;
+                        case NORTH:
+                            newpos = new Position(oldpos.getPosY()+1, oldpos.getPosX());
+                            break;
+                        case SOUTH:
+                            newpos = new Position(oldpos.getPosY()-1, oldpos.getPosX());
+                            break;
+                    }
+                    swapPosition(oldpos,newpos);
+                    monster.setDirection(direction);
+                }
+            }
+        }
+    }
 }
