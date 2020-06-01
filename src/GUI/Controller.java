@@ -6,8 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
+import GUI.GUI_GRID.GUI_Grid;
+import GUI.GUI_GRID.GUI_GridElement;
 import gameplay.LoggerMan;
-import gameplay.grid.GridElement;
+import gameplay.grid.*;
 import gameplay.logic.Game;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -91,28 +93,35 @@ public class Controller implements Initializable {
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
 
-        int numCols = game.getGridWidth() + 2;
-        int numRows = game.getGridLength() + 2;
+        int width = game.getGridWidth() + 2;
+        int height = game.getGridLength() + 2;
 
-        GridPane root = new GridPane();
-        root.setGridLinesVisible(true);
-        root.setPrefHeight(numRows * 50);
-        root.setPrefWidth(numCols * 50);
+        GridPane gridPane = new GridPane();
+        gridPane.setGridLinesVisible(true);
+        gridPane.setPrefHeight(height * 50);
+        gridPane.setPrefWidth(width * 50);
 
-        for (int i = 0; i < numCols; i++) {
+        for (int i = 0; i < width; i++) {
             ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / numCols);
-            root.getColumnConstraints().add(colConst);
+            colConst.setPercentWidth(100.0 / width);
+            gridPane.getColumnConstraints().add(colConst);
         }
-        for (int i = 0; i < numRows; i++) {
+        for (int i = 0; i < height; i++) {
             RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / numRows);
-            root.getRowConstraints().add(rowConst);
+            rowConst.setPercentHeight(100.0 / height);
+            gridPane.getRowConstraints().add(rowConst);
         }
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(new Scene(root, numCols * 50, numRows * 50));
+        window.setScene(new Scene(gridPane, width * 50, height * 50));
         window.show();
 
+        GUI_Grid gui_grid = new GUI_Grid(height, width, grid);
+        gui_grid.printGUI_Grid(gridPane);
+        //gui_grid.printGUI_Grid();
+
+    }
+
+    private void grid_visualization(ArrayList<ArrayList<GridElement>> grid, GridPane gridPane, int numRows, int numCols){
         Image wall1img = new Image("File:pictures/Wall1.png");
         Image wall2img = new Image("File:pictures/Wall2.png");
         Image bombimg = new Image("File:pictures/Bomb.png");
@@ -125,23 +134,27 @@ public class Controller implements Initializable {
                 GridElement element = grid.get(x).get(y);
                 switch (element.getType()){
                     case BOMB:
-                        root.add(new ImageView(bombimg), y, x);
+                        gridPane.add(new ImageView(bombimg), y, x);
                         break;
                     case WALL:
-                        root.add(new ImageView(wall1img), y, x);
+                        gridPane.add(new ImageView(wall1img), y, x);
                         break;
                     case PLAYER:
-                        root.add(new ImageView(player1img), y, x);
+                        Player player = (Player) element;
+                        if(player.getId() == 0){
+                            gridPane.add(new ImageView(player1img), y, x);
+                        }
+                        else{
+                            gridPane.add(new ImageView(player2img), y, x);
+                        }
                         break;
                     case MONSTER:
-                        root.add(new ImageView(monsterimg), y, x);
+                        gridPane.add(new ImageView(monsterimg), y, x);
                         break;
 
                 }
             }
         }
-
-
     }
 
     @FXML

@@ -24,6 +24,9 @@ public class Bomb extends GridElement{
         // TODO
     }
 
+    public int getId() {
+        return id;
+    }
 
     @Override
     public ElementType getType() {

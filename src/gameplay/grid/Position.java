@@ -12,6 +12,14 @@ public class Position {
         posX = x;
     }
 
+    public int getPosX() {
+        return posX;
+    }
+
+    public int getPosY() {
+        return posY;
+    }
+
     @Override
     public String toString() {
         return "{" +
