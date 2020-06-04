@@ -6,6 +6,7 @@ import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.GameEventFactory;
 import gameplay.logic.event.MovePlayerEvent;
 import gameplay.logic.event.PlaceBombEvent;
+import gameplay.logic.schedule.Detonation;
 import gameplay.logic.schedule.HandleEventSink;
 import gameplay.logic.schedule.HandleMonsters;
 
@@ -22,6 +23,8 @@ public class Controller implements Runnable{
 
     private ConcurrentLinkedQueue<GameEvent> eventPump;
     private ConcurrentLinkedQueue<GameEvent> eventSink;
+
+    private Timer timer;
 
     private GameFlag gameFlag;
     private GameEventFactory eventFactory;
@@ -40,7 +43,7 @@ public class Controller implements Runnable{
     @Override
     public void run() {
         System.out.println("level started");
-        Timer timer = new Timer();
+        timer = new Timer();
         timer.scheduleAtFixedRate(new HandleMonsters(this),0,1000);
         timer.scheduleAtFixedRate(new HandleEventSink(this),500,1000);
 
@@ -96,13 +99,6 @@ public class Controller implements Runnable{
             monster.setDirection(setDirection);
         }
     }
-
-
-
-
-
-
-
 
     public void handleEventSink() {
         System.out.println("handling event sink");
@@ -181,11 +177,15 @@ public class Controller implements Runnable{
                 level.grid.setElement(neighbor.getPosition(),bomb);
                 eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition()));
                 eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition()));
+                timer.schedule(new Detonation(this, bomb), bomb.getDetonationTime());
             }
         }
     }
 
+    public void detonateBomb(Bomb bomb){
 
+
+    }
 
 
     private Player findPlayer(String name){

@@ -5,23 +5,19 @@ public class Bomb extends GridElement{
     private static int nextId = 0;
 
     protected int range;
-    protected int timeLeft;
+    protected int detonationTime;
 
     public Bomb(Position pos){
         super(pos);
         position = pos;
         range = 2;
-        timeLeft = 2;
+        detonationTime = 2000; // milliseconds
         id = nextId;
         nextId++;
     }
 
-    protected void explode(){
-        // TODO
-    }
-
-    protected void tick(){
-        // TODO
+    public int getDetonationTime(){
+        return detonationTime;
     }
 
 
