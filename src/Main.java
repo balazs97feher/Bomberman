@@ -11,6 +11,7 @@ public class Main {
         //
         //
         //
+        /*
         RankingListManager rlm = new RankingListManager();
 
         rlm.addToRankingList("Valter", 100);
@@ -30,9 +31,16 @@ public class Main {
         //
         //
 
+         */
+
         // Network Demo
         //
         //
+        TestPlayerMoved proba = new TestPlayerMoved();
+        TestPlayerMoved received = new TestPlayerMoved();
+
+        proba.PlayerMovedEvent(1, 4, 6);
+
         Scanner scanner = new Scanner(System.in);
 
         int serverclient = 0;
@@ -86,18 +94,28 @@ public class Main {
             tx = scanner.nextInt();
 
             if (tx == 1) {
+                /*
                 System.out.println("Write the message: ");
                 //buffer = scanner.nextLine();
                 buffer = System.console().readLine();
                 System.out.println(buffer);
 
+                 */
 
-                NC.send(buffer);
+
+                NC.send(proba);
+                System.out.println("Message sent!");
+
 
                 tx = 0;
             } else {
                 System.out.println("Received data:");
-                System.out.println(NC.receive());
+                received = NC.receive();
+                System.out.println(received.getPlayerId());
+                System.out.println(received.getPreviousPosition());
+                System.out.println(received.getNewPosition());
+
+
             }
         }
 

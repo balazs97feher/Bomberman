@@ -9,6 +9,9 @@ public class NetworkCommunication {
     private DataOutputStream dos;
     private DataInputStream dis;
 
+
+
+
     private Socket socket;
     private ServerSocket serverSocket;
 
@@ -21,6 +24,7 @@ public class NetworkCommunication {
     //konstruktor
     //csak h latszodjon h lefut
     NetworkCommunication() {
+
         System.out.println("CONSTRUCTOR: Network Communication ");
     }
 
@@ -38,13 +42,27 @@ public class NetworkCommunication {
 
 
     //uzenet kuldese
-    //string uzenet kuldese parameterkent
-    public void send(String message){
+    //objektum uzenet kuldese parameterkent
+    public void send(TestPlayerMoved message){
         try {
+
+            ObjectOutputStream oos = new ObjectOutputStream(dos);
+
+
+            oos.writeObject(message);
+            oos.flush();
+            oos.close();
+
+            return;
+
+            //string kuldese
+            /*
             dos.writeUTF(message);
             dos.flush();
             message = "";
             return;
+
+             */
         } catch (IOException e1) {
             errors++;
             e1.printStackTrace();
@@ -52,15 +70,18 @@ public class NetworkCommunication {
     }
 
     //uzenet fogadasa
-    //fogadott string-et ad vissza
-    public String receive(){
+    //fogadott objektumot ad vissza
+    public TestPlayerMoved receive(){
         try{
-            return dis.readUTF();
+            ObjectInputStream ois = new ObjectInputStream(dis);
 
-        }catch(IOException e2){
+            return (TestPlayerMoved) ois.readObject();
+
+        }catch(IOException | ClassNotFoundException e2){
             errors++;
             e2.printStackTrace();
-            return "ERROR";
+            TestPlayerMoved error = new TestPlayerMoved();
+            return error;
         }
     }
 
