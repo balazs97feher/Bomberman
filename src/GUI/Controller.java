@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import GUI.GUI_GRID.GUI_Grid;
 import GUI.GUI_GRID.GUI_GridElement;
@@ -82,12 +83,11 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void startoffline_action(ActionEvent event) throws IOException{
-        System.out.println("Starting the offline game...");
+    private void startOfflineGame(ActionEvent event){
+        LoggerMan.log(Level.INFO, "Offline game started.");
 
-        LoggerMan.initialize();
         Game game = new Game();
-        game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
+        game.initialize(new ArrayList<>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
 
         int width = game.getGridWidth() + 2;
