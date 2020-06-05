@@ -1,7 +1,9 @@
 package GUI;
 
 import GUI.GUI_GRID.GUI_Grid;
+import gameplay.grid.Direction;
 import gameplay.grid.GridElement;
+import gameplay.grid.Position;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
@@ -63,8 +65,35 @@ public class GUI {
     public void backtomain() throws IOException {
         Parent mainMenuParent = FXMLLoader.load(getClass().getResource("mainmenu.fxml"));
         Scene mainMenuScene = new Scene(mainMenuParent);
-
         window.setScene(mainMenuScene);
         window.show();
+    }
+
+    public void movemonster(int monsterid, Direction dir){
+        grid.movemonster(monsterid,dir);
+    }
+
+    public void moveplayer(int playerid, Direction dir){
+        grid.moveplayer(playerid,dir);
+    }
+
+    public void removemonster(int monsterid){
+        grid.removemonster(monsterid);
+    }
+
+    public void removeplayer(int playerid){
+        grid.removeplayer(playerid);
+    }
+
+    public void removewall(int wallid){
+        grid.removewall(wallid);
+    }
+
+    public  void addbomb(Position pos, int bombid){
+        grid.addbomb(pos,bombid);
+    }
+
+    public void removebomb(int bombid){
+        grid.removebomb(bombid);
     }
 }
