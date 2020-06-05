@@ -183,8 +183,8 @@ public class Controller implements Runnable{
 
     public void detonateBomb(Bomb bomb){
         level.bombs.remove(bomb);
-
-
+        eventPump.add(eventFactory.createBombDetonatedEvent(bomb.getId()));
+        level.grid.setElement(bomb.getPosition(),new EmptyElement(bomb.getPosition()));
     }
 
 

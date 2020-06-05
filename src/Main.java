@@ -15,7 +15,6 @@ public class Main {
         game.startLevel();
 
         game.placeBomb("Eric");
-        game.placeBomb("Eric");
         game.placeBomb("Bri");
         while(game.isRunning()){
             GameEvent e = game.pollEventPump();

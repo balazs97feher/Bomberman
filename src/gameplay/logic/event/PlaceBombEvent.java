@@ -22,7 +22,7 @@ public class PlaceBombEvent implements GameEvent {
     @Override
     public String toString() {
         return "PlaceBombEvent{" +
-            "playerName='" + playerName + '\'' +
+            "playerName = " + playerName + '\'' +
             '}';
     }
 }

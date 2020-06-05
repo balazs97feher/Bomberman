@@ -27,7 +27,8 @@ public class BombPlacedEvent implements GameEvent{
     @Override
     public String toString() {
         return "BombPlacedEvent{" +
-            "position=" + position +
+            "position = " + position +
+            ", id = " + bombId +
             '}';
     }
 }
