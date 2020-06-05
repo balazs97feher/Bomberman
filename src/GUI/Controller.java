@@ -83,6 +83,7 @@ public class Controller implements Initializable {
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
         gui.setScore_label(offline_nickname);
+        gui.moveplayer(0,Direction.SOUTH);
         //gui.backtomain();
 
     }
