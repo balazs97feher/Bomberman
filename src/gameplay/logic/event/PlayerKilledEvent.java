@@ -7,12 +7,19 @@ public class PlayerKilledEvent implements GameEvent {
         playerId = id;
     }
 
+    public int getplayerId() {
+        return playerId;
+    }
+
     @Override
     public GameEventType getEventType() {
         return GameEventType.PLAYER_KILLED;
     }
 
-    public int getMonsterId() {
-        return playerId;
+    @Override
+    public String toString() {
+        return "PlayerKilledEvent{" +
+            "playerId = " + playerId +
+            '}';
     }
 }

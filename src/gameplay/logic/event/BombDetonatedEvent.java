@@ -7,12 +7,19 @@ public class BombDetonatedEvent implements GameEvent {
         bombId = id;
     }
 
+    public int getBombId() {
+        return bombId;
+    }
+
     @Override
     public GameEventType getEventType() {
         return GameEventType.BOMB_DETONATED;
     }
 
-    public int getMonsterId() {
-        return bombId;
+    @Override
+    public String toString() {
+        return "BombDetonatedEvent{" +
+            "bombId = " + bombId +
+            '}';
     }
 }

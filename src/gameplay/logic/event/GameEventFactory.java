@@ -47,4 +47,10 @@ public class GameEventFactory {
         return e;
     }
 
+    public BombDetonatedEvent createBombDetonatedEvent(int bombId){
+        BombDetonatedEvent e = new BombDetonatedEvent(bombId);
+        gameEventLogger.log(Level.INFO, e.toString());
+        return e;
+    }
+
 }

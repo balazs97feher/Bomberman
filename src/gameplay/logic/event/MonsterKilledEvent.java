@@ -7,12 +7,19 @@ public class MonsterKilledEvent implements GameEvent {
         monsterId = id;
     }
 
+    public int getMonsterId() {
+        return monsterId;
+    }
+
     @Override
     public GameEventType getEventType() {
         return GameEventType.MONSTER_KILLED;
     }
 
-    public int getMonsterId() {
-        return monsterId;
+    @Override
+    public String toString() {
+        return "MonsterKilledEvent{" +
+            "monsterId = " + monsterId +
+            '}';
     }
 }
