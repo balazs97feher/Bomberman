@@ -3,8 +3,9 @@ package GUI;
 import gameplay.logic.Game;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.MonsterMovedEvent;
+import javafx.application.Platform;
 
-public class Renderer implements Runnable {
+public class Renderer implements Runnable{
     private Game game;
     private GUI gui;
 
@@ -21,7 +22,7 @@ public class Renderer implements Runnable {
                 switch (nextEvent.getEventType()){
                     case MONSTER_MOVED:
                         MonsterMovedEvent e1 = (MonsterMovedEvent)nextEvent;
-                        gui.movemonster(e1.getMonsterId(),e1.getDirection());
+                        Platform.runLater(() -> gui.movemonster(e1.getMonsterId(),e1.getDirection()));
                         break;
                     case MONSTER_KILLED:
                         break;
@@ -39,7 +40,7 @@ public class Renderer implements Runnable {
                         break;
                 }
             }
-        }
 
+        }
     }
 }
