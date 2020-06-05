@@ -41,8 +41,8 @@ public class GameEventFactory {
         return e;
     }
 
-    public BombPlacedEvent createBombPlacedEvent(Position position){
-        BombPlacedEvent e = new BombPlacedEvent(position);
+    public BombPlacedEvent createBombPlacedEvent(Position position, int bombId){
+        BombPlacedEvent e = new BombPlacedEvent(position, bombId);
         gameEventLogger.log(Level.INFO,e.toString());
         return e;
     }

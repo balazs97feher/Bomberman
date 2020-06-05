@@ -174,7 +174,7 @@ public class Controller implements Runnable{
                 level.grid.swapElements(player,neighbor);
                 player.setDirection(stepAway);
                 level.grid.setElement(neighbor.getPosition(),bomb);
-                eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition()));
+                eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition(), bomb.getId()));
                 eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition()));
                 timer.schedule(new Detonation(this, bomb), bomb.getDetonationTime());
             }

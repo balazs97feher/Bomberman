@@ -20,10 +20,12 @@ public class Bomb extends GridElement{
         return detonationTime;
     }
 
+    public int getId() {
+        return id;
+    }
 
     @Override
     public ElementType getType() {
         return ElementType.BOMB;
     }
-
 }
