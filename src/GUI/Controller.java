@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import GUI.GUI_GRID.GUI_Grid;
 import GUI.GUI_GRID.GUI_GridElement;
@@ -27,6 +28,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
+
+    private Game game;
 
     @FXML
     private AnchorPane mainmenu_pane;
@@ -83,15 +86,23 @@ public class Controller implements Initializable {
 
     @FXML
     private void startOfflineGame(ActionEvent event) throws IOException{
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        LoggerMan.initialize();
-        Game game = new Game();
+        LoggerMan.log(Level.INFO, "Offline game started.");
+
+        game = new Game();
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
-        GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
-        gui.setScore_label("Probaaaaa");
-        //gui.backtomain();
 
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
+        GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
+
+        game.startLevel();
+
+
+
+
+
+
+        //gui.backtomain();
     }
 
     @FXML

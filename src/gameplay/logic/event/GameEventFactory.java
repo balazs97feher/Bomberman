@@ -1,6 +1,7 @@
 package gameplay.logic.event;
 
 import gameplay.grid.Bomb;
+import gameplay.grid.Direction;
 import gameplay.grid.Position;
 
 import java.io.IOException;
@@ -35,8 +36,8 @@ public class GameEventFactory {
         return e;
     }
 
-    public PlayerMovedEvent createPlayerMovedEvent(int playerId, Position previousPos, Position nextPos){
-        PlayerMovedEvent e =  new PlayerMovedEvent(playerId,previousPos,nextPos);
+    public PlayerMovedEvent createPlayerMovedEvent(int playerId, Position previousPos, Position nextPos, Direction direction){
+        PlayerMovedEvent e =  new PlayerMovedEvent(playerId,previousPos,nextPos, direction);
         gameEventLogger.log(Level.INFO,e.toString());
         return e;
     }

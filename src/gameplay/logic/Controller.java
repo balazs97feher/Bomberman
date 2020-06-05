@@ -131,7 +131,7 @@ public class Controller implements Runnable{
         else{
             GridElement neighbor = level.grid.getNeighbor(player.getPosition(),direction);
             if(neighbor != null && neighbor.getType() == ElementType.EMPTY){
-                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),player.getPosition(),neighbor.getPosition()));
+                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),player.getPosition(),neighbor.getPosition(),direction));
 
                 level.grid.swapElements(player,neighbor);
                 player.setDirection(direction);
@@ -175,7 +175,7 @@ public class Controller implements Runnable{
                 player.setDirection(stepAway);
                 level.grid.setElement(neighbor.getPosition(),bomb);
                 eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition(), bomb.getId()));
-                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition()));
+                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition(),stepAway));
                 timer.schedule(new Detonation(this, bomb), bomb.getDetonationTime());
             }
         }
