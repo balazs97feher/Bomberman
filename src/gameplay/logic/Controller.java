@@ -182,6 +182,7 @@ public class Controller implements Runnable{
     }
 
     public void detonateBomb(Bomb bomb){
+        level.bombs.remove(bomb);
 
 
     }
