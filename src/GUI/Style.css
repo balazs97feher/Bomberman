@@ -1,0 +1,12 @@
+.background {
+-fx-background-image:url("File:pictures/background.png");
+-fx-background-size: contain;
+}
+
+.button {
+-fx-background-color: transparent;
+}
+
+.button:focused{
+-fx-text-fill: #d29494
+}

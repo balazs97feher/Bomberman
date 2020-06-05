@@ -20,6 +20,10 @@ public class Wall extends GridElement{
         }
     }
 
+    public int getId(){return id;}
+
+    public boolean getDestructible(){return isDestructible;}
+
     @Override
     public ElementType getType() {
         return ElementType.WALL;

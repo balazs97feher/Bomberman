@@ -1,0 +1,21 @@
+package GUI.GUI_GRID;
+
+import gameplay.grid.Direction;
+import gameplay.grid.ElementType;
+import gameplay.grid.Position;
+
+public class GUI_Player extends GUI_Character{
+
+    public GUI_Player(Position pos, Direction dir, int id) {
+        super(pos, dir, id);
+    }
+
+    public int getId(){
+        return id;
+    }
+
+    @Override
+    public ElementType getType() {
+        return ElementType.PLAYER;
+    }
+}

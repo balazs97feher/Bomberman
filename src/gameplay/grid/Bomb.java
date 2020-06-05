@@ -16,11 +16,11 @@ public class Bomb extends GridElement{
         nextId++;
     }
 
-    public int getDetonationTime(){
+    public int getDetonationTime() {
         return detonationTime;
     }
 
-    public int getId() {
+    public int getId(){
         return id;
     }
 
@@ -28,4 +28,5 @@ public class Bomb extends GridElement{
     public ElementType getType() {
         return ElementType.BOMB;
     }
+
 }

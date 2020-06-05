@@ -1,26 +1,25 @@
 import gameplay.LoggerMan;
 import gameplay.logic.Game;
-import gameplay.logic.event.GameEvent;
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
 
-import java.util.ArrayList;
-import java.util.List;
+public class Main extends Application {
 
-public class Main {
+    @Override
+    public void start(Stage primaryStage) throws Exception{
+        Parent root = FXMLLoader.load(getClass().getResource("GUI/mainmenu.fxml"));
+        primaryStage.setTitle("Bomberman");
+        primaryStage.setScene(new Scene(root, 800, 600));
+        primaryStage.setResizable(false);
+        primaryStage.show();
+    }
+
+
     public static void main(String[] args) {
-        LoggerMan.initialize();
-
-        Game game = new Game();
-        game.initialize(new ArrayList<>(List.of("Eric","Bri","Adam")));
-        game.initializeNextLevel();
-        game.startLevel();
-
-        game.placeBomb("Eric");
-        game.placeBomb("Bri");
-        while(game.isRunning()){
-            GameEvent e = game.pollEventPump();
-//            if (e != null) System.out.println(e.getEventType().toString());
-        }
-
+        launch(args);
 
 
     }
