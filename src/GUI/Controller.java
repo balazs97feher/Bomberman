@@ -81,8 +81,11 @@ public class Controller implements Initializable {
         Game game = new Game();
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
+        System.out.println("1");
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
+        System.out.println("2");
         gui.setScore_label(offline_nickname);
+        System.out.println("3");
         gui.moveplayer(0,Direction.SOUTH);
         //gui.backtomain();
 
