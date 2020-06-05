@@ -71,29 +71,36 @@ public class GUI {
 
     public void movemonster(int monsterid, Direction dir){
         grid.movemonster(monsterid,dir);
+        grid.printGUI_Grid(gridPane);
     }
 
     public void moveplayer(int playerid, Direction dir){
         grid.moveplayer(playerid,dir);
+        grid.printGUI_Grid(gridPane);
     }
 
     public void removemonster(int monsterid){
         grid.removemonster(monsterid);
+        grid.printGUI_Grid(gridPane);
     }
 
     public void removeplayer(int playerid){
         grid.removeplayer(playerid);
+        grid.printGUI_Grid(gridPane);
     }
 
     public void removewall(int wallid){
         grid.removewall(wallid);
+        grid.printGUI_Grid(gridPane);
     }
 
     public  void addbomb(Position pos, int bombid){
         grid.addbomb(pos,bombid);
+        grid.printGUI_Grid(gridPane);
     }
 
     public void removebomb(int bombid){
         grid.removebomb(bombid);
+        grid.printGUI_Grid(gridPane);
     }
 }

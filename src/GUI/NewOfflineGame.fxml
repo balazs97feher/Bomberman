@@ -24,7 +24,7 @@
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <TextField>
+                  <TextField id="offline_nicknameid" fx:id="offline_nicknameid">
                      <font>
                         <Font name="Papyrus" size="14.0" />
                      </font>
