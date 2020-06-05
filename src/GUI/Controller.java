@@ -23,10 +23,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.ColumnConstraints;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.RowConstraints;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
@@ -111,9 +108,15 @@ public class Controller implements Initializable {
             rowConst.setPercentHeight(100.0 / height);
             gridPane.getRowConstraints().add(rowConst);
         }
+        VBox vbox = new VBox();
+        Label score_label = new Label();
+        vbox.getChildren().addAll(score_label, gridPane);
+
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(new Scene(gridPane, width * 50, height * 50));
+        window.setScene(new Scene(vbox));
         window.show();
+
+        score_label.setText("Proba");
 
         GUI_Grid gui_grid = new GUI_Grid(height, width, grid);
         //gui_grid.changePosition(new Position(1,1),new Position(1,2));
