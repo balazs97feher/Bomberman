@@ -33,7 +33,7 @@
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <Label id="label_IPAdress" fx:id="label_IPAdress" text="000.000.000.000">
+                  <Label id="server_ipadressid" fx:id="server_ipadressid" text="000.000.000.000">
                      <font>
                         <Font name="Papyrus" size="18.0" />
                      </font>

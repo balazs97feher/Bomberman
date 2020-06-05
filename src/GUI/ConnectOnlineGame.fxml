@@ -24,7 +24,7 @@
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="240.0">
+                  <TextField id="client_ipadressid" fx:id="client_ipadressid" prefHeight="40.0" prefWidth="240.0">
                      <font>
                         <Font name="Papyrus" size="14.0" />
                      </font>
@@ -38,7 +38,7 @@
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <TextField prefHeight="40.0" prefWidth="240.0">
+                  <TextField id="client_nicknameid" fx:id="client_nicknameid" prefHeight="40.0" prefWidth="240.0">
                      <font>
                         <Font name="Papyrus" size="14.0" />
                      </font>

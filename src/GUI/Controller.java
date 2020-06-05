@@ -38,31 +38,22 @@ public class Controller implements Initializable {
     private Label label_waitingconnection;
 
     @FXML
-    private Label label_IPAdress;
-
-    @FXML
-    private TextField serverNicknameIn;
-
-    @FXML
-    private Label serverNicknameOut;
-
-    @FXML
     private GridPane gridpaneid;
 
     @FXML
-    private void set_grid_resolution(int width, int height){
-        gridpaneid.setGridLinesVisible(true);
-        for (int i = 0; i < width; i++){
-            ColumnConstraints colConst = new ColumnConstraints();
-            //colConst.setPercentWidth(100.0 / width);
-            gridpaneid.getColumnConstraints().add(colConst);
-        }
-        for (int i = 0; i < height; i++){
-            RowConstraints rowConst = new RowConstraints();
-            //rowConst.setPercentHeight(100.0 / height);
-            gridpaneid.getRowConstraints().add(rowConst);
-        }
-    }
+    private TextField offline_nicknameid;
+
+    @FXML
+    private TextField client_ipadressid;
+
+    @FXML
+    private TextField client_nicknameid;
+
+    @FXML
+    private Label server_ipadressid;
+
+    @FXML
+    private TextField server_nicknameid;
 
     @FXML
     private void connected_action(ActionEvent event){
@@ -72,7 +63,8 @@ public class Controller implements Initializable {
 
     @FXML
     private void connecttogame_action(ActionEvent event) throws IOException{
-        System.out.println("Connecting to the online game...");
+        String client_nickname = client_nicknameid.getText();
+        String client_ipadress = client_ipadressid.getText();
         Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("onlineGame.fxml"));
         Scene newOnlineGameScene = new Scene(newOnlineGameParent);
 
@@ -83,25 +75,28 @@ public class Controller implements Initializable {
 
     @FXML
     private void startoffline_action(ActionEvent event) throws IOException{
+        String offline_nickname = offline_nicknameid.getText();
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         LoggerMan.initialize();
         Game game = new Game();
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
-        gui.setScore_label("Probaaaaa");
+        gui.setScore_label(offline_nickname);
         //gui.backtomain();
 
     }
 
     @FXML
     private void startonline_action(ActionEvent event) throws IOException{
+        String server_nicnakme = server_nicknameid.getText();
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         LoggerMan.initialize();
         Game game = new Game();
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
+        gui.setScore_label(server_nicnakme);
     }
 
     @FXML
