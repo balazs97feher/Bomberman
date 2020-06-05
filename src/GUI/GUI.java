@@ -2,6 +2,9 @@ package GUI;
 
 import GUI.GUI_GRID.GUI_Grid;
 import gameplay.grid.GridElement;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.ColumnConstraints;
@@ -10,6 +13,7 @@ import javafx.scene.layout.RowConstraints;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
 public class GUI {
@@ -54,5 +58,13 @@ public class GUI {
 
     public void setScore_label(String str){
         score_label.setText(str);
+    }
+
+    public void backtomain() throws IOException {
+        Parent mainMenuParent = FXMLLoader.load(getClass().getResource("mainmenu.fxml"));
+        Scene mainMenuScene = new Scene(mainMenuParent);
+
+        window.setScene(mainMenuScene);
+        window.show();
     }
 }

@@ -90,6 +90,7 @@ public class Controller implements Initializable {
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
         gui.setScore_label("Probaaaaa");
+        //gui.backtomain();
 
     }
 
