@@ -181,10 +181,10 @@ public class GUI_Grid {
                             newpos = new Position(oldpos.getPosY(), oldpos.getPosX()-1);
                             break;
                         case NORTH:
-                            newpos = new Position(oldpos.getPosY()+1, oldpos.getPosX());
+                            newpos = new Position(oldpos.getPosY()-1, oldpos.getPosX());
                             break;
                         case SOUTH:
-                            newpos = new Position(oldpos.getPosY()-1, oldpos.getPosX());
+                            newpos = new Position(oldpos.getPosY()+1, oldpos.getPosX());
                             break;
                     }
                     swapPosition(oldpos,newpos);

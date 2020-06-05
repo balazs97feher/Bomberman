@@ -126,8 +126,8 @@ public class Controller implements Initializable {
         gui_grid.removebomb(55);
         gui_grid.removemonster(0);
         //gui_grid.removeplayer(0);
-        gui_grid.moveplayer(0,Direction.EAST);
-        gui_grid.removewall(0);
+        gui_grid.moveplayer(0,Direction.SOUTH);
+//        gui_grid.removewall(0);
         gui_grid.printGUI_Grid(gridPane);
 
     }

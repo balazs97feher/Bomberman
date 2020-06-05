@@ -18,8 +18,8 @@ public class Game {
     private Level level;
     private int levelNumber;
 
-    final private int gridLength = 5;
-    final private int gridWidth = 9;
+    final private int gridLength = 9;
+    final private int gridWidth = 15;
 
     private Controller controller;
     private GameFlag gameFlag; // flag that indicates that a level is in progress
