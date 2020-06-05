@@ -83,68 +83,24 @@ public class Controller implements Initializable {
 
     @FXML
     private void startoffline_action(ActionEvent event) throws IOException{
-        System.out.println("Starting the offline game...");
-
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         LoggerMan.initialize();
         Game game = new Game();
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
-
-        int width = game.getGridWidth() + 2;
-        int height = game.getGridLength() + 2;
-
-        GridPane gridPane = new GridPane();
-        gridPane.setGridLinesVisible(true);
-        gridPane.setPrefHeight(height * 50);
-        gridPane.setPrefWidth(width * 50);
-
-        for (int i = 0; i < width; i++) {
-            ColumnConstraints colConst = new ColumnConstraints();
-            colConst.setPercentWidth(100.0 / width);
-            gridPane.getColumnConstraints().add(colConst);
-        }
-        for (int i = 0; i < height; i++) {
-            RowConstraints rowConst = new RowConstraints();
-            rowConst.setPercentHeight(100.0 / height);
-            gridPane.getRowConstraints().add(rowConst);
-        }
-        VBox vbox = new VBox();
-        Label score_label = new Label();
-        vbox.getChildren().addAll(score_label, gridPane);
-
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(new Scene(vbox));
-        window.show();
-
-        score_label.setText("Proba");
-
-        GUI_Grid gui_grid = new GUI_Grid(height, width, grid);
-        //gui_grid.changePosition(new Position(1,1),new Position(1,2));
-        gui_grid.swapPosition(new Position(5,1),new Position(4,2));
-        gui_grid.addbomb(new Position(1,5),6);
-        gui_grid.addbomb(new Position(1,2),55);
-        gui_grid.removebomb(55);
-        gui_grid.removemonster(0);
-        //gui_grid.removeplayer(0);
-        gui_grid.moveplayer(0,Direction.EAST);
-        gui_grid.removewall(0);
-        gui_grid.printGUI_Grid(gridPane);
+        GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
+        gui.setScore_label("Probaaaaa");
 
     }
 
     @FXML
     private void startonline_action(ActionEvent event) throws IOException{
-        System.out.println("Starting the online game...");
-        Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("onlineGame.fxml"));
-        Scene newOnlineGameScene = new Scene(newOnlineGameParent);
-
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newOnlineGameScene);
-        gridpaneid.setGridLinesVisible(true);
-        //set_grid_resolution(200, 150);
-        serverNicknameIn.setText(String.valueOf(serverNicknameIn.getCharacters()));
-        window.show();
-
+        LoggerMan.initialize();
+        Game game = new Game();
+        game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
+        ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
+        GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
     }
 
     @FXML
