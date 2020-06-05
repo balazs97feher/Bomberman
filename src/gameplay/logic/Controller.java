@@ -92,7 +92,7 @@ public class Controller implements Runnable{
             else setDirection = freeDirections.get(randomGenerator.nextInt(freeDirections.size())); // if cannot go ahead, then turn randomly
             GridElement neighbor = level.grid.getNeighbor(monster.getPosition(),setDirection);
 
-            eventPump.add(eventFactory.createMonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition()));
+            eventPump.add(eventFactory.createMonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition(),setDirection));
 
             level.grid.swapElements(monster,neighbor);
             monster.setDirection(setDirection);

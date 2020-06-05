@@ -30,8 +30,8 @@ public class GameEventFactory {
         }
     }
 
-    public MonsterMovedEvent createMonsterMovedEvent(int monsterId, Position previousPos, Position nextPos){
-        MonsterMovedEvent e = new MonsterMovedEvent(monsterId,previousPos,nextPos);
+    public MonsterMovedEvent createMonsterMovedEvent(int monsterId, Position previousPos, Position nextPos, Direction direction){
+        MonsterMovedEvent e = new MonsterMovedEvent(monsterId,previousPos,nextPos,direction);
         gameEventLogger.log(Level.INFO,e.toString());
         return e;
     }
