@@ -82,7 +82,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void startoffline_action(ActionEvent event) throws IOException{
+    private void startOfflineGame(ActionEvent event) throws IOException{
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         LoggerMan.initialize();
         Game game = new Game();
