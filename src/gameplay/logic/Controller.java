@@ -30,7 +30,6 @@ public class Controller implements Runnable{
     private GameEventFactory eventFactory;
 
 
-
     public Controller(HashMap<String,Integer> scoreBoard, Level l, ConcurrentLinkedQueue<GameEvent> pump, ConcurrentLinkedQueue<GameEvent> sink, GameFlag flag){
         playerScores = scoreBoard;
         level = l;
@@ -42,7 +41,7 @@ public class Controller implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("level started");
+        LoggerMan.log(java.util.logging.Level.INFO, "Level " + level.levelNumber + " has started.");
         timer = new Timer();
         timer.scheduleAtFixedRate(new HandleMonsters(this),0,1000);
         timer.scheduleAtFixedRate(new HandleEventSink(this),500,1000);
