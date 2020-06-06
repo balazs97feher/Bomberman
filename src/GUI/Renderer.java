@@ -3,10 +3,7 @@ package GUI;
 import gameplay.grid.Direction;
 import gameplay.grid.Position;
 import gameplay.logic.Game;
-import gameplay.logic.event.BombPlacedEvent;
-import gameplay.logic.event.GameEvent;
-import gameplay.logic.event.MonsterMovedEvent;
-import gameplay.logic.event.PlayerMovedEvent;
+import gameplay.logic.event.*;
 import javafx.application.Platform;
 import javafx.event.EventHandler;
 import javafx.scene.input.KeyEvent;
@@ -45,21 +42,11 @@ public class Renderer implements Runnable{
                         Platform.runLater(() -> gui.addbomb(e3.getPosition(),e3.getBombId()));
                         break;
                     case BOMB_DETONATED:
+                        BombDetonatedEvent e4 = (BombDetonatedEvent)nextEvent;
+                        Platform.runLater(() -> gui.removebomb(e4.getBombId()));
                         break;
                 }
             }
-            gui.window.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-                @Override
-                public void handle(KeyEvent keyEvent) {
-                    switch(keyEvent.getCode()){
-                        case UP: gui.moveplayer(0, Direction.NORTH); break;
-                        case DOWN: gui.moveplayer(0, Direction.SOUTH); break;
-                        case RIGHT: gui.moveplayer(0, Direction.EAST); break;
-                        case LEFT: gui.moveplayer(0, Direction.WEST); break;
-                        case SPACE: gui.addbomb(new Position(1, 1), 5); break;
-                    }
-                }
-            });
 
         }
     }
