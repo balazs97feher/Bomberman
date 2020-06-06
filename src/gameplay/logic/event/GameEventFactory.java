@@ -54,4 +54,10 @@ public class GameEventFactory {
         return e;
     }
 
+    public PlayerKilledEvent createPlayerKilledEvent(int playerId){
+        PlayerKilledEvent e = new PlayerKilledEvent(playerId);
+        gameEventLogger.log(Level.INFO, e.toString());
+        return e;
+    }
+
 }

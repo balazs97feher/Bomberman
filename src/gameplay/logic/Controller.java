@@ -97,6 +97,7 @@ public class Controller implements Runnable{
             level.grid.swapElements(monster,neighbor);
             monster.setDirection(setDirection);
         }
+        killNearbyPlayers(monster);
     }
 
     public void handleEventSink() {
@@ -125,8 +126,7 @@ public class Controller implements Runnable{
 
         if(player == null){
             String noSuchPlayer = "No such player in this level.";
-            LoggerMan.log(java.util.logging.Level.SEVERE,"movePlayer: " + noSuchPlayer);
-            throw new NullPointerException(noSuchPlayer);
+            LoggerMan.log(java.util.logging.Level.WARNING,"movePlayer: " + noSuchPlayer);
         }
         else{
             GridElement neighbor = level.grid.getNeighbor(player.getPosition(),direction);
@@ -188,6 +188,17 @@ public class Controller implements Runnable{
         level.grid.setElement(bomb.getPosition(),new EmptyElement(bomb.getPosition()));
     }
 
+    private void killNearbyPlayers(Monster monster){
+        for(Direction direction : Grid.directions){
+            GridElement neighbor = level.grid.getNeighbor(monster.getPosition(),direction);
+            if(neighbor != null && neighbor.getType() == ElementType.PLAYER){
+                Player playerToKill = (Player)neighbor;
+                level.players.remove(playerToKill);
+                level.grid.setElement(playerToKill.getPosition(),new EmptyElement(playerToKill.getPosition()));
+                eventPump.add(eventFactory.createPlayerKilledEvent(playerToKill.getId()));
+            }
+        }
+    }
 
     private Player findPlayer(String name){
         Player player = null;

@@ -29,13 +29,13 @@ public class Renderer implements Runnable{
                         break;
                     case MONSTER_KILLED:
                         break;
-                    case MOVE_PLAYER:
-                        break;
                     case PLAYER_MOVED:
                         PlayerMovedEvent e2 = (PlayerMovedEvent)nextEvent;
                         Platform.runLater(() -> gui.moveplayer(e2.getPlayerId(),e2.getDirection()));
                         break;
                     case PLAYER_KILLED:
+                        PlayerKilledEvent e5 = (PlayerKilledEvent)nextEvent;
+                        Platform.runLater(() -> gui.removeplayer(e5.getplayerId()));
                         break;
                     case BOMB_PLACED:
                         BombPlacedEvent e3 = (BombPlacedEvent)nextEvent;
