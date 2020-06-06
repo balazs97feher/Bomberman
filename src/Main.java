@@ -19,8 +19,7 @@ public class Main extends Application {
 
 
     public static void main(String[] args) {
+        LoggerMan.initialize();
         launch(args);
-
-
     }
 }

@@ -1,16 +1,19 @@
 package gameplay.logic.event;
 
+import gameplay.grid.Direction;
 import gameplay.grid.Position;
 
 public class PlayerMovedEvent implements GameEvent {
     private int playerId;
     private Position previousPosition;
     private Position newPosition;
+    private Direction direction;
 
-    public PlayerMovedEvent(int id, Position previousPos, Position newPos){
+    public PlayerMovedEvent(int id, Position previousPos, Position newPos, Direction dir){
         playerId = id;
         previousPosition = previousPos;
         newPosition = newPos;
+        direction = dir;
     }
 
     @Override

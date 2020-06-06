@@ -10,7 +10,7 @@
 
 <AnchorPane prefHeight="600.0" prefWidth="800.0" styleClass="background" stylesheets="@Style.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="GUI.Controller">
    <children>
-      <Button id="backtomain2" fx:id="backtomain2" layoutX="619.0" layoutY="539.0" mnemonicParsing="false" onAction="#backtomain_action" text="Back to main maneu">
+      <Button id="backtomain2" layoutX="619.0" layoutY="539.0" mnemonicParsing="false" onAction="#backtomain_action" text="Back to main maneu">
          <font>
             <Font name="Papyrus" size="14.0" />
          </font>
@@ -31,7 +31,7 @@
                   </TextField>
                </children>
             </HBox>
-            <Button id="button_startolllinegame" fx:id="button_startolllinegame" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startoffline_action" text="Start the game">
+            <Button id="button_startOfflineGame" contentDisplay="CENTER" mnemonicParsing="false" onAction="#startOfflineGame" text="Start the game">
                <font>
                   <Font name="Papyrus" size="18.0" />
                </font>

@@ -1,6 +1,7 @@
 package gameplay.logic.event;
 
 import gameplay.grid.Bomb;
+import gameplay.grid.Direction;
 import gameplay.grid.Position;
 
 import java.io.IOException;
@@ -29,21 +30,27 @@ public class GameEventFactory {
         }
     }
 
-    public MonsterMovedEvent createMonsterMovedEvent(int monsterId, Position previousPos, Position nextPos){
-        MonsterMovedEvent e = new MonsterMovedEvent(monsterId,previousPos,nextPos);
+    public MonsterMovedEvent createMonsterMovedEvent(int monsterId, Position previousPos, Position nextPos, Direction direction){
+        MonsterMovedEvent e = new MonsterMovedEvent(monsterId,previousPos,nextPos,direction);
         gameEventLogger.log(Level.INFO,e.toString());
         return e;
     }
 
-    public PlayerMovedEvent createPlayerMovedEvent(int playerId, Position previousPos, Position nextPos){
-        PlayerMovedEvent e =  new PlayerMovedEvent(playerId,previousPos,nextPos);
+    public PlayerMovedEvent createPlayerMovedEvent(int playerId, Position previousPos, Position nextPos, Direction direction){
+        PlayerMovedEvent e =  new PlayerMovedEvent(playerId,previousPos,nextPos, direction);
         gameEventLogger.log(Level.INFO,e.toString());
         return e;
     }
 
-    public BombPlacedEvent createBombPlacedEvent(Position position){
-        BombPlacedEvent e = new BombPlacedEvent(position);
+    public BombPlacedEvent createBombPlacedEvent(Position position, int bombId){
+        BombPlacedEvent e = new BombPlacedEvent(position, bombId);
         gameEventLogger.log(Level.INFO,e.toString());
+        return e;
+    }
+
+    public BombDetonatedEvent createBombDetonatedEvent(int bombId){
+        BombDetonatedEvent e = new BombDetonatedEvent(bombId);
+        gameEventLogger.log(Level.INFO, e.toString());
         return e;
     }
 

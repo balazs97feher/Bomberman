@@ -5,12 +5,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
 
 import GUI.GUI_GRID.GUI_Grid;
 import GUI.GUI_GRID.GUI_GridElement;
 import gameplay.LoggerMan;
 import gameplay.grid.*;
 import gameplay.logic.Game;
+import gameplay.logic.event.GameEvent;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -27,6 +30,8 @@ import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 public class Controller implements Initializable {
+
+    private Game game;
 
     @FXML
     private AnchorPane mainmenu_pane;
@@ -74,18 +79,24 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void startoffline_action(ActionEvent event) throws IOException{
-        String offline_nickname = offline_nicknameid.getText();
-        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        LoggerMan.initialize();
-        Game game = new Game();
+    private void startOfflineGame(ActionEvent event) throws IOException{
+        LoggerMan.log(Level.INFO, "Offline game started.");
+
+        game = new Game();
         game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
+
+        Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
+        String offline_nickname = offline_nicknameid.getText();
         gui.setScore_label(offline_nickname);
 
-        //gui.backtomain();
+        game.startLevel();
+        Renderer guiRenderer = new Renderer(game,gui);
+        Thread rendererThread = new Thread(guiRenderer);
+        rendererThread.start();
 
+        //gui.backtomain();
     }
 
     @FXML

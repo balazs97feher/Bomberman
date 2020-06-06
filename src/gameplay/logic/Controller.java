@@ -6,6 +6,7 @@ import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.GameEventFactory;
 import gameplay.logic.event.MovePlayerEvent;
 import gameplay.logic.event.PlaceBombEvent;
+import gameplay.logic.schedule.Detonation;
 import gameplay.logic.schedule.HandleEventSink;
 import gameplay.logic.schedule.HandleMonsters;
 
@@ -23,9 +24,10 @@ public class Controller implements Runnable{
     private ConcurrentLinkedQueue<GameEvent> eventPump;
     private ConcurrentLinkedQueue<GameEvent> eventSink;
 
+    private Timer timer;
+
     private GameFlag gameFlag;
     private GameEventFactory eventFactory;
-
 
 
     public Controller(HashMap<String,Integer> scoreBoard, Level l, ConcurrentLinkedQueue<GameEvent> pump, ConcurrentLinkedQueue<GameEvent> sink, GameFlag flag){
@@ -39,8 +41,8 @@ public class Controller implements Runnable{
 
     @Override
     public void run() {
-        System.out.println("level started");
-        Timer timer = new Timer();
+        LoggerMan.log(java.util.logging.Level.INFO, "Level " + level.levelNumber + " has started.");
+        timer = new Timer();
         timer.scheduleAtFixedRate(new HandleMonsters(this),0,1000);
         timer.scheduleAtFixedRate(new HandleEventSink(this),500,1000);
 
@@ -90,19 +92,12 @@ public class Controller implements Runnable{
             else setDirection = freeDirections.get(randomGenerator.nextInt(freeDirections.size())); // if cannot go ahead, then turn randomly
             GridElement neighbor = level.grid.getNeighbor(monster.getPosition(),setDirection);
 
-            eventPump.add(eventFactory.createMonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition()));
+            eventPump.add(eventFactory.createMonsterMovedEvent(monster.getId(),monster.getPosition(),neighbor.getPosition(),setDirection));
 
             level.grid.swapElements(monster,neighbor);
             monster.setDirection(setDirection);
         }
     }
-
-
-
-
-
-
-
 
     public void handleEventSink() {
         System.out.println("handling event sink");
@@ -136,7 +131,7 @@ public class Controller implements Runnable{
         else{
             GridElement neighbor = level.grid.getNeighbor(player.getPosition(),direction);
             if(neighbor != null && neighbor.getType() == ElementType.EMPTY){
-                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),player.getPosition(),neighbor.getPosition()));
+                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),player.getPosition(),neighbor.getPosition(),direction));
 
                 level.grid.swapElements(player,neighbor);
                 player.setDirection(direction);
@@ -179,13 +174,18 @@ public class Controller implements Runnable{
                 level.grid.swapElements(player,neighbor);
                 player.setDirection(stepAway);
                 level.grid.setElement(neighbor.getPosition(),bomb);
-                eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition()));
-                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition()));
+                eventPump.add(eventFactory.createBombPlacedEvent(bomb.getPosition(), bomb.getId()));
+                eventPump.add(eventFactory.createPlayerMovedEvent(player.getId(),neighbor.getPosition(),player.getPosition(),stepAway));
+                timer.schedule(new Detonation(this, bomb), bomb.getDetonationTime());
             }
         }
     }
 
-
+    public void detonateBomb(Bomb bomb){
+        level.bombs.remove(bomb);
+        eventPump.add(eventFactory.createBombDetonatedEvent(bomb.getId()));
+        level.grid.setElement(bomb.getPosition(),new EmptyElement(bomb.getPosition()));
+    }
 
 
     private Player findPlayer(String name){
