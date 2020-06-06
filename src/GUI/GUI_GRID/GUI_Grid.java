@@ -90,7 +90,7 @@ public class GUI_Grid {
                     break;
             }
         }
-        gridPane.setGridLinesVisible(true);
+
     }
 
     public void changePosition(Position oldPos, Position newPos){
