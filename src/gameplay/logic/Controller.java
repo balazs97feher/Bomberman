@@ -165,7 +165,7 @@ public class Controller implements Runnable{
                 LoggerMan.log(java.util.logging.Level.SEVERE,"placeBomb: Player is stuck, cannot place bomb.");
             }
             else{
-                Bomb bomb = new Bomb(player.getPosition());
+                Bomb bomb = new Bomb(player.getPosition(), player);
                 level.bombs.add(bomb);
                 level.grid.swapElements(player,neighbor);
                 player.setDirection(stepAway);
