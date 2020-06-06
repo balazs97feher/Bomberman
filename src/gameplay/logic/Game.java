@@ -66,8 +66,6 @@ public class Game {
         eventPump.clear();
         eventSink.clear();
 
-        level.grid.printGrid();
-
         return level.grid.getElements();
     }
 

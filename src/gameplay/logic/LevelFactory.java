@@ -42,9 +42,6 @@ public class LevelFactory {
             level.grid.addCharacter(level.players.get(i));
             i++;
         }
-
-        // for debugging
-//        grid.printGrid();
     }
 
     /**
@@ -74,11 +71,6 @@ public class LevelFactory {
                     }
                 }
             }
-
         }
-
-        // for debugging
-//        grid.printGrid();
     }
-
 }
