@@ -94,7 +94,7 @@ public class GUI {
         grid.printGUI_Grid(gridPane);
     }
 
-    public  void addbomb(Position pos, int bombid){
+    public void addbomb(Position pos, int bombid){
         grid.addbomb(pos,bombid);
         grid.printGUI_Grid(gridPane);
     }

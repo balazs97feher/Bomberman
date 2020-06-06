@@ -7,13 +7,9 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
-import GUI.GUI_GRID.GUI_Grid;
-import GUI.GUI_GRID.GUI_GridElement;
 import gameplay.LoggerMan;
 import gameplay.grid.*;
 import gameplay.logic.Game;
-import gameplay.logic.event.GameEvent;
-import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,8 +20,6 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
