@@ -4,6 +4,8 @@ import gameplay.logic.Game;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.MonsterMovedEvent;
 import javafx.application.Platform;
+import javafx.event.EventHandler;
+import javafx.scene.input.KeyEvent;
 
 public class Renderer implements Runnable{
     private Game game;
@@ -40,6 +42,18 @@ public class Renderer implements Runnable{
                         break;
                 }
             }
+            gui.window.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+                @Override
+                public void handle(KeyEvent keyEvent) {
+                    switch(keyEvent.getCode()){
+                        case UP: System.out.println("Up pressed"); break;
+                        case DOWN: System.out.println("Down pressed"); break;
+                        case RIGHT: System.out.println("Right pressed"); break;
+                        case LEFT: System.out.println("Left pressed"); break;
+                        case SPACE: System.out.println("Space pressed"); break;
+                    }
+                }
+            });
 
         }
     }
