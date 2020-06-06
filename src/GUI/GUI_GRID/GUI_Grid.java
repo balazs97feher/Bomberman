@@ -95,25 +95,6 @@ public class GUI_Grid {
         }
     }
 
-    public void changePosition(Position oldPos, Position newPos){
-        for(int i = 0; i < elements.size(); i++){
-            GUI_GridElement element = elements.get(i);
-            if(element.getPosition().getPosX() == oldPos.getPosX()){
-                if(element.getPosition().getPosY() == oldPos.getPosY()){
-                    element.setPosition(newPos);
-                }
-            }
-
-        }
-    }
-
-    public void swapPosition(Position pos1, Position pos2){
-        Position temp = new Position(height, width);
-        changePosition(pos1,temp);
-        changePosition(pos2,pos1);
-        changePosition(temp,pos2);
-    }
-
     public void addbomb(Position pos, int id){
         elements.add(new GUI_Bomb(pos,id));
     }
@@ -172,23 +153,22 @@ public class GUI_Grid {
             if(element.getType() == ElementType.PLAYER){
                 GUI_Player player = (GUI_Player) element;
                 if(player.getId() == playerid){
-                    Position oldpos = player.getPosition();
                     Position newpos = new Position(height,width);
                     switch (direction){
                         case EAST:
-                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()+1);
+                            newpos = new Position(element.getPosition().getPosY(), element.getPosition().getPosX()+1);
                             break;
                         case WEST:
-                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()-1);
+                            newpos = new Position(element.getPosition().getPosY(),element.getPosition().getPosX()-1);
                             break;
                         case NORTH:
-                            newpos = new Position(oldpos.getPosY()-1, oldpos.getPosX());
+                            newpos = new Position(element.getPosition().getPosY()-1,element.getPosition().getPosX());
                             break;
                         case SOUTH:
-                            newpos = new Position(oldpos.getPosY()+1, oldpos.getPosX());
+                            newpos = new Position(element.getPosition().getPosY()+1, element.getPosition().getPosX());
                             break;
                     }
-                    swapPosition(oldpos,newpos);
+                    player.setPosition(newpos);
                     player.setDirection(direction);
                 }
             }
@@ -201,23 +181,22 @@ public class GUI_Grid {
             if(element.getType() == ElementType.MONSTER){
                 GUI_Monster monster = (GUI_Monster) element;
                 if(monster.getId() == monsterid){
-                    Position oldpos = monster.getPosition();
                     Position newpos = new Position(height,width);
                     switch (direction){
                         case EAST:
-                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()+1);
+                            newpos = new Position(element.getPosition().getPosY(), element.getPosition().getPosX()+1);
                             break;
                         case WEST:
-                            newpos = new Position(oldpos.getPosY(), oldpos.getPosX()-1);
+                            newpos = new Position(element.getPosition().getPosY(),element.getPosition().getPosX()-1);
                             break;
                         case NORTH:
-                            newpos = new Position(oldpos.getPosY()-1, oldpos.getPosX());
+                            newpos = new Position(element.getPosition().getPosY()-1,element.getPosition().getPosX());
                             break;
                         case SOUTH:
-                            newpos = new Position(oldpos.getPosY()+1, oldpos.getPosX());
+                            newpos = new Position(element.getPosition().getPosY()+1, element.getPosition().getPosX());
                             break;
                     }
-                    swapPosition(oldpos,newpos);
+                    monster.setPosition(newpos);
                     monster.setDirection(direction);
                 }
             }

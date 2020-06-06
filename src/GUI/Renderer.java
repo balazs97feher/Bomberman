@@ -1,5 +1,7 @@
 package GUI;
 
+import gameplay.grid.Direction;
+import gameplay.grid.Position;
 import gameplay.logic.Game;
 import gameplay.logic.event.BombPlacedEvent;
 import gameplay.logic.event.GameEvent;
@@ -50,11 +52,11 @@ public class Renderer implements Runnable{
                 @Override
                 public void handle(KeyEvent keyEvent) {
                     switch(keyEvent.getCode()){
-                        case UP: System.out.println("Up pressed"); break;
-                        case DOWN: System.out.println("Down pressed"); break;
-                        case RIGHT: System.out.println("Right pressed"); break;
-                        case LEFT: System.out.println("Left pressed"); break;
-                        case SPACE: System.out.println("Space pressed"); break;
+                        case UP: gui.moveplayer(0, Direction.NORTH); break;
+                        case DOWN: gui.moveplayer(0, Direction.SOUTH); break;
+                        case RIGHT: gui.moveplayer(0, Direction.EAST); break;
+                        case LEFT: gui.moveplayer(0, Direction.WEST); break;
+                        case SPACE: gui.addbomb(new Position(1, 1), 5); break;
                     }
                 }
             });
