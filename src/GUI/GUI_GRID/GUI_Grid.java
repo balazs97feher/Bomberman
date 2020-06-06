@@ -57,9 +57,18 @@ public class GUI_Grid {
         Image wall1img = new Image("File:pictures/Wall1.png");
         Image wall2img = new Image("File:pictures/Wall2.png");
         Image bombimg = new Image("File:pictures/Bomb.png");
-        Image monsterimg = new Image("File:pictures/Monster.png");
-        Image player1img = new Image("File:pictures/Player1.png");
-        Image player2img = new Image("File:pictures/Player2.png");
+        Image monster_leftimg = new Image("File:pictures/monster_left.png");
+        Image monster_rightimg = new Image("File:pictures/monster_right.png");
+        Image monster_upimg = new Image("File:pictures/monster_up.png");
+        Image monster_downimg = new Image("File:pictures/monster_down.png");
+        Image player1_leftimg = new Image("File:pictures/player1_left.png");
+        Image player1_rightimg = new Image("File:pictures/player1_right.png");
+        Image player1_upimg = new Image("File:pictures/player1_up.png");
+        Image player1_downimg = new Image("File:pictures/player1_down.png");
+        Image player2_leftimg = new Image("File:pictures/player2_left.png");
+        Image player2_rightimg = new Image("File:pictures/player2_right.png");
+        Image player2_upimg = new Image("File:pictures/player2_up.png");
+        Image player2_downimg = new Image("File:pictures/player2_down.png");
 
         gridPane.getChildren().clear();
         for(int i = 0; i < elements.size(); i++){
@@ -81,14 +90,54 @@ public class GUI_Grid {
                 case PLAYER:
                     GUI_Player player = (GUI_Player) element;
                     if(player.getId() == 0){
-                        gridPane.add(new ImageView(player1img), element.getPosition().getPosX(), element.getPosition().getPosY());
+                        switch (player.getDirection()){
+                            case EAST:
+                                gridPane.add(new ImageView(player1_rightimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                            case WEST:
+                                gridPane.add(new ImageView(player1_leftimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                            case SOUTH:
+                                gridPane.add(new ImageView(player1_downimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                            case NORTH:
+                                gridPane.add(new ImageView(player1_upimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                        }
                     }
                     else{
-                        gridPane.add(new ImageView(player2img), element.getPosition().getPosX(), element.getPosition().getPosY());
+                        switch (player.getDirection()){
+                            case EAST:
+                                gridPane.add(new ImageView(player2_rightimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                            case WEST:
+                                gridPane.add(new ImageView(player2_leftimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                            case SOUTH:
+                                gridPane.add(new ImageView(player2_downimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                            case NORTH:
+                                gridPane.add(new ImageView(player2_upimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                                break;
+                        }
                     }
                     break;
                 case MONSTER:
-                    gridPane.add(new ImageView(monsterimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                    GUI_Monster monster = (GUI_Monster) element;
+                    switch (monster.getDirection()){
+                        case EAST:
+                            gridPane.add(new ImageView(monster_rightimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                            break;
+                        case WEST:
+                            gridPane.add(new ImageView(monster_leftimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                            break;
+                        case SOUTH:
+                            gridPane.add(new ImageView(monster_downimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                            break;
+                        case NORTH:
+                            gridPane.add(new ImageView(monster_upimg), element.getPosition().getPosX(), element.getPosition().getPosY());
+                            break;
+                    }
                     break;
 
             }
