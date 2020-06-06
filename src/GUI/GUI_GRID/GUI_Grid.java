@@ -61,6 +61,7 @@ public class GUI_Grid {
         Image player1img = new Image("File:pictures/Player1.png");
         Image player2img = new Image("File:pictures/Player2.png");
 
+        gridPane.getChildren().clear();
         for(int i = 0; i < elements.size(); i++){
             GUI_GridElement element = elements.get(i);
             switch (element.getType())

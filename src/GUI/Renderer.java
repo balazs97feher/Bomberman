@@ -1,8 +1,10 @@
 package GUI;
 
 import gameplay.logic.Game;
+import gameplay.logic.event.BombPlacedEvent;
 import gameplay.logic.event.GameEvent;
 import gameplay.logic.event.MonsterMovedEvent;
+import gameplay.logic.event.PlayerMovedEvent;
 import javafx.application.Platform;
 
 public class Renderer implements Runnable{
@@ -29,12 +31,14 @@ public class Renderer implements Runnable{
                     case MOVE_PLAYER:
                         break;
                     case PLAYER_MOVED:
+                        PlayerMovedEvent e2 = (PlayerMovedEvent)nextEvent;
+                        Platform.runLater(() -> gui.moveplayer(e2.getPlayerId(),e2.getDirection()));
                         break;
                     case PLAYER_KILLED:
                         break;
-                    case PLACE_BOMB:
-                        break;
                     case BOMB_PLACED:
+                        BombPlacedEvent e3 = (BombPlacedEvent)nextEvent;
+                        Platform.runLater(() -> gui.addbomb(e3.getPosition(),e3.getBombId()));
                         break;
                     case BOMB_DETONATED:
                         break;
