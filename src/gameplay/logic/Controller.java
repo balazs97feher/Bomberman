@@ -53,15 +53,11 @@ public class Controller implements Runnable{
     }
 
     public void handleMonsters(){
-        System.out.println("handling monsters");
-
         for (Monster monster : level.monsters) {
             synchronized (level){
                 moveMonster(monster);
             }
         }
-        level.grid.printGrid();
-
     }
 
     private void moveMonster(Monster monster){
@@ -101,7 +97,6 @@ public class Controller implements Runnable{
     }
 
     public void handleEventSink() {
-        System.out.println("handling event sink");
         GameEvent next = eventSink.poll();
         if(next != null){
             synchronized (level){
