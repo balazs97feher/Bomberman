@@ -33,6 +33,10 @@ public class PlayerMovedEvent implements GameEvent {
         return newPosition;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     @Override
     public String toString() {
         return "PlayerMovedEvent{" +

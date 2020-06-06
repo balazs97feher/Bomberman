@@ -43,8 +43,8 @@ public class Controller implements Runnable{
     public void run() {
         LoggerMan.log(java.util.logging.Level.INFO, "Level " + level.levelNumber + " has started.");
         timer = new Timer();
-        timer.scheduleAtFixedRate(new HandleMonsters(this),0,1000);
-        timer.scheduleAtFixedRate(new HandleEventSink(this),500,1000);
+        timer.scheduleAtFixedRate(new HandleMonsters(this),0,800);
+        timer.scheduleAtFixedRate(new HandleEventSink(this),500,100);
 
         while(!gameFlag.terminated){}
         timer.cancel();
@@ -161,7 +161,8 @@ public class Controller implements Runnable{
                 for(Direction direction : Grid.directions){ // if not, find a direction to step away to
                     neighbor = level.grid.getNeighbor(player.getPosition(),direction);
                     if(neighbor != null && neighbor.getType() == ElementType.EMPTY){
-                        stepAway = player.getDirection();
+                        stepAway = direction;
+                        break;
                     }
                 }
             }

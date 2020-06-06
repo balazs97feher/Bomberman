@@ -62,35 +62,37 @@ public class GUI_Grid {
         Image player2img = new Image("File:pictures/Player2.png");
 
         gridPane.getChildren().clear();
-
         for(int i = 0; i < elements.size(); i++){
             GUI_GridElement element = elements.get(i);
-            switch (element.getType()) {
+            switch (element.getType())
+            {
                 case BOMB:
                     gridPane.add(new ImageView(bombimg), element.getPosition().getPosX(), element.getPosition().getPosY());
                     break;
                 case WALL:
                     GUI_WALL wall = (GUI_WALL) element;
-                    if (wall.getDestructible() == true) {
+                    if(wall.getDestructible() == true){
                         gridPane.add(new ImageView(wall2img), element.getPosition().getPosX(), element.getPosition().getPosY());
-                    } else {
+                    }
+                    else{
                         gridPane.add(new ImageView(wall1img), element.getPosition().getPosX(), element.getPosition().getPosY());
                     }
                     break;
                 case PLAYER:
                     GUI_Player player = (GUI_Player) element;
-                    if (player.getId() == 0) {
+                    if(player.getId() == 0){
                         gridPane.add(new ImageView(player1img), element.getPosition().getPosX(), element.getPosition().getPosY());
-                    } else {
+                    }
+                    else{
                         gridPane.add(new ImageView(player2img), element.getPosition().getPosX(), element.getPosition().getPosY());
                     }
                     break;
                 case MONSTER:
                     gridPane.add(new ImageView(monsterimg), element.getPosition().getPosX(), element.getPosition().getPosY());
                     break;
+
             }
         }
-
     }
 
     public void changePosition(Position oldPos, Position newPos){

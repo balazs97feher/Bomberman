@@ -7,10 +7,15 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 
+import GUI.GUI_GRID.GUI_Grid;
+import GUI.GUI_GRID.GUI_GridElement;
 import gameplay.LoggerMan;
 import gameplay.grid.*;
 import gameplay.logic.Game;
+import gameplay.logic.event.GameEvent;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -20,12 +25,19 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+
+import static javafx.scene.input.KeyCode.R;
 
 public class Controller implements Initializable {
 
     private Game game;
+    private String localPlayer;
 
     @FXML
     private AnchorPane mainmenu_pane;
@@ -74,16 +86,30 @@ public class Controller implements Initializable {
 
     @FXML
     private void startOfflineGame(ActionEvent event) throws IOException{
+        localPlayer = offline_nicknameid.getText();
         LoggerMan.log(Level.INFO, "Offline game started.");
 
         game = new Game();
-        game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
+        game.initialize(new ArrayList<String>(List.of(localPlayer)));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
         String offline_nickname = offline_nicknameid.getText();
-        gui.setScore_label(offline_nickname);
+        gui.setScore_label(localPlayer);
+
+        gui.window.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch(keyEvent.getCode()){
+                    case UP: movePlayer(localPlayer, Direction.NORTH); break;
+                    case DOWN: movePlayer(localPlayer, Direction.SOUTH); break;
+                    case RIGHT: movePlayer(localPlayer, Direction.EAST); break;
+                    case LEFT: movePlayer(localPlayer, Direction.WEST);; break;
+                    case SPACE: placeBomb(localPlayer); break;
+                }
+            }
+        });
 
         game.startLevel();
         Renderer guiRenderer = new Renderer(game,gui);
@@ -95,14 +121,14 @@ public class Controller implements Initializable {
 
     @FXML
     private void startonline_action(ActionEvent event) throws IOException{
-        String server_nicnakme = server_nicknameid.getText();
+        localPlayer = server_nicknameid.getText();
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         LoggerMan.initialize();
         Game game = new Game();
-        game.initialize(new ArrayList<String>(List.of("Eric","Bri","Adam")));
+        game.initialize(new ArrayList<String>(List.of(localPlayer)));
         ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
         GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
-        gui.setScore_label(server_nicnakme);
+        gui.setScore_label(localPlayer);
     }
 
     @FXML
@@ -164,6 +190,17 @@ public class Controller implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+    }
 
+    private void movePlayer(String player, Direction direction){
+        if(game != null){
+            game.movePlayer(player,direction);
+        }
+    }
+
+    private void placeBomb(String player){
+        if(game != null){
+            game.placeBomb(player);
+        }
     }
 }
