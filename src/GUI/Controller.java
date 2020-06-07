@@ -72,14 +72,20 @@ public class Controller implements Initializable {
 
     @FXML
     private void connecttogame_action(ActionEvent event) throws IOException{
-        String client_nickname = client_nicknameid.getText();
+        localPlayer = client_nicknameid.getText();
         String client_ipadress = client_ipadressid.getText();
-        Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("onlineGame.fxml"));
-        Scene newOnlineGameScene = new Scene(newOnlineGameParent);
-
+        String client_port = client_portid.getText();
+        System.out.println("Nickanme: " + localPlayer);
+        System.out.println("IP Adress: " + client_ipadress);
+        System.out.println("Port: " + client_port);
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
-        window.setScene(newOnlineGameScene);
-        window.show();
+        LoggerMan.initialize();
+        Game game = new Game();
+        game.initialize(new ArrayList<String>(List.of(localPlayer)));
+        ArrayList<ArrayList<GridElement>> grid = game.initializeNextLevel();
+        GUI gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
+        gui.setScore_label(localPlayer);
+
     }
 
     @FXML
