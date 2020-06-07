@@ -1,8 +1,12 @@
 package GUI;
 
+import gameplay.LoggerMan;
 import gameplay.logic.Game;
 import gameplay.logic.event.*;
 import javafx.application.Platform;
+
+import java.io.IOException;
+import java.util.logging.Level;
 
 public class Renderer implements Runnable{
     private Game game;
@@ -45,7 +49,15 @@ public class Renderer implements Runnable{
                         break;
                 }
             }
-
         }
+        Platform.runLater(() -> {
+            try {
+                gui.backtomain();
+            } catch (IOException e) {
+                e.printStackTrace();
+                LoggerMan.log(Level.SEVERE, "Main menu couldn't be loaded.");
+            }
+        });
     }
+
 }

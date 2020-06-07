@@ -46,10 +46,9 @@ public class Controller implements Runnable{
         timer.scheduleAtFixedRate(new HandleMonsters(this),0,800);
         timer.scheduleAtFixedRate(new HandleEventSink(this),500,100);
 
-        while(!gameFlag.terminated){}
+        while(gameFlag.running && !gameFlag.terminated){}
         timer.cancel();
         System.out.println("level completed");
-        gameFlag.running = false;
     }
 
     public void handleMonsters(){
@@ -143,8 +142,7 @@ public class Controller implements Runnable{
 
         if(player == null){
             String noSuchPlayer = "No such player in this level.";
-            LoggerMan.log(java.util.logging.Level.SEVERE,"placeBomb: " + noSuchPlayer);
-            throw new NullPointerException(noSuchPlayer);
+            LoggerMan.log(java.util.logging.Level.WARNING,"movePlayer: " + noSuchPlayer);
         }
         else{
             Direction stepAway = null;
@@ -198,6 +196,7 @@ public class Controller implements Runnable{
                 }
             }
         }
+        checkIfGameOver();
     }
 
     private void killNearbyPlayers(Monster monster){
@@ -219,6 +218,13 @@ public class Controller implements Runnable{
             break;
         }
         return player;
+    }
+
+    private void checkIfGameOver(){
+        if(level.monsters.size() == 0 || level.players.size() == 0){
+            eventPump.add(eventFactory.createLevelFinishedEvent(level.levelNumber));
+            gameFlag.running = false;
+        }
     }
 
 }

@@ -8,5 +8,6 @@ public enum GameEventType {
     PLAYER_KILLED,
     PLACE_BOMB,
     BOMB_PLACED,
-    BOMB_DETONATED
+    BOMB_DETONATED,
+    LEVEL_FINISHED
 }

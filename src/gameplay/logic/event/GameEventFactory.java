@@ -65,4 +65,10 @@ public class GameEventFactory {
         return e;
     }
 
+    public LevelFinishedEvent createLevelFinishedEvent(int levelNo){
+        LevelFinishedEvent e = new LevelFinishedEvent(levelNo);
+        gameEventLogger.log(Level.INFO, e.toString());
+        return e;
+    }
+
 }
