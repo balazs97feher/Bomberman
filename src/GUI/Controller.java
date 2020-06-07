@@ -87,21 +87,9 @@ public class Controller implements Initializable {
 
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         gui = new GUI(game.getGridLength() + 2, game.getGridWidth() + 2, grid, window);
-        String offline_nickname = offline_nicknameid.getText();
         gui.setScore_label(localPlayer);
 
-        gui.window.getScene().setOnKeyPressed(new EventHandler<KeyEvent>() {
-            @Override
-            public void handle(KeyEvent keyEvent) {
-                switch(keyEvent.getCode()){
-                    case UP: movePlayer(localPlayer, Direction.NORTH); break;
-                    case DOWN: movePlayer(localPlayer, Direction.SOUTH); break;
-                    case RIGHT: movePlayer(localPlayer, Direction.EAST); break;
-                    case LEFT: movePlayer(localPlayer, Direction.WEST);; break;
-                    case SPACE: placeBomb(localPlayer); break;
-                }
-            }
-        });
+        attachKeyboard(gui.window.getScene());
 
         game.startLevel();
         Renderer guiRenderer = new Renderer(game,gui);
@@ -193,4 +181,20 @@ public class Controller implements Initializable {
             game.placeBomb(player);
         }
     }
+
+    private void attachKeyboard(Scene scene){
+        scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+            @Override
+            public void handle(KeyEvent keyEvent) {
+                switch(keyEvent.getCode()){
+                    case UP: movePlayer(localPlayer, Direction.NORTH); break;
+                    case DOWN: movePlayer(localPlayer, Direction.SOUTH); break;
+                    case RIGHT: movePlayer(localPlayer, Direction.EAST); break;
+                    case LEFT: movePlayer(localPlayer, Direction.WEST);; break;
+                    case SPACE: placeBomb(localPlayer); break;
+                }
+            }
+        });
+    }
+
 }
