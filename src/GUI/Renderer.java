@@ -11,14 +11,20 @@ import java.util.logging.Level;
 public class Renderer implements Runnable{
     private Game game;
     private GUI gui;
+    private boolean online;
 
     public Renderer(Game ga, GUI gu){
         game = ga;
         gui = gu;
+        online = false;
     }
 
     @Override
     public void run() {
+        if(!online) renderOfflineGame();
+    }
+
+    private void renderOfflineGame(){
         while(game.isRunning()){
             GameEvent nextEvent = game.pollEventPump();
             if(nextEvent != null){
