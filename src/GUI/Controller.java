@@ -62,7 +62,7 @@ public class Controller implements Initializable {
     private Label server_portid;
 
     @FXML
-    private Label client_portid;
+    private TextField client_portid;
 
     @FXML
     private void connected_action(ActionEvent event){
@@ -147,7 +147,6 @@ public class Controller implements Initializable {
         System.out.println("Connecting to online game...");
         Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("ConnectOnlineGame.fxml"));
         Scene newOnlineGameScene = new Scene(newOnlineGameParent);
-
         Stage window = (Stage) ((Node)event.getSource()).getScene().getWindow();
         window.setScene(newOnlineGameScene);
         window.show();
