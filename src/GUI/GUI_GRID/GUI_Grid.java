@@ -69,6 +69,7 @@ public class GUI_Grid {
         Image player2_rightimg = new Image("File:pictures/player2_right.png");
         Image player2_upimg = new Image("File:pictures/player2_up.png");
         Image player2_downimg = new Image("File:pictures/player2_down.png");
+        
 
         gridPane.getChildren().clear();
         for(int i = 0; i < elements.size(); i++){

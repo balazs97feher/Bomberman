@@ -19,7 +19,7 @@
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <TextField id="serverNicknameIn" fx:id="serverNicknameIn" prefHeight="37.0" prefWidth="149.0">
+                  <TextField id="server_nicknameid" fx:id="server_nicknameid" prefHeight="37.0" prefWidth="149.0">
                      <font>
                         <Font name="Papyrus" size="14.0" />
                      </font>
@@ -28,12 +28,26 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="38.0" prefWidth="386.0" spacing="50.0">
                <children>
-                  <Label text="IP ADress:">
+                  <Label text="IP Adress:">
                      <font>
                         <Font name="Papyrus" size="18.0" />
                      </font>
                   </Label>
-                  <Label id="server_ipadressid" fx:id="server_ipadressid" text="000.000.000.000">
+                  <Label id="server_ipadressid" fx:id="server_ipadressid">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="38.0" prefWidth="386.0" spacing="50.0">
+               <children>
+                  <Label text="Port:">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <Label id="server_portid" fx:id="server_portid">
                      <font>
                         <Font name="Papyrus" size="18.0" />
                      </font>

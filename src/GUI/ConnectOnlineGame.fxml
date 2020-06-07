@@ -33,6 +33,20 @@
             </HBox>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
                <children>
+                  <Label text="Port:">
+                     <font>
+                        <Font name="Papyrus" size="18.0" />
+                     </font>
+                  </Label>
+                  <TextField id="client_portid" fx:id="client_portid" prefHeight="40.0" prefWidth="240.0">
+                     <font>
+                        <Font name="Papyrus" size="14.0" />
+                     </font>
+                  </TextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
                   <Label text="Nickname:">
                      <font>
                         <Font name="Papyrus" size="18.0" />

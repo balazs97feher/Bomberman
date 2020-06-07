@@ -59,6 +59,12 @@ public class Controller implements Initializable {
     private TextField server_nicknameid;
 
     @FXML
+    private Label server_portid;
+
+    @FXML
+    private Label client_portid;
+
+    @FXML
     private void connected_action(ActionEvent event){
         label_waitingconnection.setText("Connected");
         button_startonlinegame.setVisible(true);
@@ -79,6 +85,7 @@ public class Controller implements Initializable {
     @FXML
     private void startOfflineGame(ActionEvent event) throws IOException{
         localPlayer = offline_nicknameid.getText();
+        System.out.println(localPlayer);
         LoggerMan.log(Level.INFO, "Offline game started.");
 
         game = new Game();
@@ -120,6 +127,8 @@ public class Controller implements Initializable {
         window.setScene(newOnlineGameScene);
 
         window.show();
+        //server_ipadressid.setText("123.456.789");
+        //server_portid.setText("01");
     }
 
     @FXML
