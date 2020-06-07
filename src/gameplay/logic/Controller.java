@@ -181,6 +181,23 @@ public class Controller implements Runnable{
         level.bombs.remove(bomb);
         eventPump.add(eventFactory.createBombDetonatedEvent(bomb.getId()));
         level.grid.setElement(bomb.getPosition(),new EmptyElement(bomb.getPosition()));
+        for(Direction direction : Grid.directions){
+            GridElement neighbor = level.grid.getNeighbor(bomb.getPosition(),direction);
+            if(neighbor != null){
+                if(neighbor.getType() == ElementType.PLAYER){
+                    Player playerToKill = (Player)neighbor;
+                    level.players.remove(playerToKill);
+                    level.grid.setElement(playerToKill.getPosition(),new EmptyElement(playerToKill.getPosition()));
+                    eventPump.add(eventFactory.createPlayerKilledEvent(playerToKill.getId()));
+                }
+                else if(neighbor.getType() == ElementType.MONSTER){
+                    Monster monsterToKill = (Monster) neighbor;
+                    level.monsters.remove(monsterToKill);
+                    level.grid.setElement(monsterToKill.getPosition(),new EmptyElement(monsterToKill.getPosition()));
+                    eventPump.add(eventFactory.createMonsterKilledEvent(monsterToKill.getId()));
+                }
+            }
+        }
     }
 
     private void killNearbyPlayers(Monster monster){

@@ -1,6 +1,5 @@
 package gameplay.logic.event;
 
-import gameplay.grid.Bomb;
 import gameplay.grid.Direction;
 import gameplay.grid.Position;
 
@@ -56,6 +55,12 @@ public class GameEventFactory {
 
     public PlayerKilledEvent createPlayerKilledEvent(int playerId){
         PlayerKilledEvent e = new PlayerKilledEvent(playerId);
+        gameEventLogger.log(Level.INFO, e.toString());
+        return e;
+    }
+
+    public MonsterKilledEvent createMonsterKilledEvent(int monsterId){
+        MonsterKilledEvent e = new MonsterKilledEvent(monsterId);
         gameEventLogger.log(Level.INFO, e.toString());
         return e;
     }

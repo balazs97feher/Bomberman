@@ -1,12 +1,8 @@
 package GUI;
 
-import gameplay.grid.Direction;
-import gameplay.grid.Position;
 import gameplay.logic.Game;
 import gameplay.logic.event.*;
 import javafx.application.Platform;
-import javafx.event.EventHandler;
-import javafx.scene.input.KeyEvent;
 
 public class Renderer implements Runnable{
     private Game game;
@@ -28,6 +24,8 @@ public class Renderer implements Runnable{
                         Platform.runLater(() -> gui.movemonster(e1.getMonsterId(),e1.getDirection()));
                         break;
                     case MONSTER_KILLED:
+                        MonsterKilledEvent e6 = (MonsterKilledEvent)nextEvent;
+                        Platform.runLater(() -> gui.removemonster(e6.getMonsterId()));
                         break;
                     case PLAYER_MOVED:
                         PlayerMovedEvent e2 = (PlayerMovedEvent)nextEvent;
