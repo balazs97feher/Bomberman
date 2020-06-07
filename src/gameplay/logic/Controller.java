@@ -209,6 +209,7 @@ public class Controller implements Runnable{
                 eventPump.add(eventFactory.createPlayerKilledEvent(playerToKill.getId()));
             }
         }
+        checkIfGameOver();
     }
 
     private Player findPlayer(String name){

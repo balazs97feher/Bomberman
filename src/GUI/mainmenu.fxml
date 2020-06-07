@@ -14,7 +14,7 @@
                   <Font name="Papyrus" size="22.0" />
                </font>
             </Button>
-            <Button id="buttonStartOffline" fx:id="ButtonStartOffline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newoffline_action" prefHeight="62.0" prefWidth="286.0" text="Start offline game" textAlignment="CENTER">
+            <Button id="buttonStartOffline" fx:id="ButtonStartOffline" contentDisplay="CENTER" mnemonicParsing="false" onAction="#newOfflineGame" prefHeight="62.0" prefWidth="286.0" text="Start offline game" textAlignment="CENTER">
                <font>
                   <Font name="Papyrus" size="22.0" />
                </font>

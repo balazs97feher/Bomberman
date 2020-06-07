@@ -123,7 +123,7 @@ public class Controller implements Initializable {
     }
 
     @FXML
-    private void newoffline_action(ActionEvent event) throws IOException{
+    private void newOfflineGame(ActionEvent event) throws IOException{
         System.out.println("Starting new offline game...");
         Parent newOnlineGameParent = FXMLLoader.load(getClass().getResource("NewOfflineGame.fxml"));
         Scene newOnlineGameScene = new Scene(newOnlineGameParent);
